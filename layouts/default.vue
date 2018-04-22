@@ -1,8 +1,7 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
-      :mini-variant="miniVariant"
-      :clipped="clipped"
+      temporary
       v-model="drawer"
       fixed
       app
@@ -24,31 +23,30 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app :clipped-left="clipped">
-      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+    <v-toolbar color="primary" class="d-flex" dense flat dark app>
+      <nuxt-link to="/">
+        <v-toolbar-title>
+          <v-avatar tile>
+            <img src="https://user-images.githubusercontent.com/21119252/34459239-16407fee-ee1d-11e7-94c1-dc6446f962b0.png" alt="FLS Logo">
+          </v-avatar>
+        </v-toolbar-title>
+      </nuxt-link>
       <v-spacer></v-spacer>
+      <div class="align-center hidden-sm-and-down" style="margin-left: auto">
+        <template v-for="item in items" >
+          <v-btn v-if="item.outlink" outline round :href="item.to" :key="item.title">
+            {{ item.title }}
+            <v-icon size="medium" class="ml-1">{{ item.icon }}</v-icon>
+          </v-btn>
+          <v-btn v-else outline round :to="item.to" :key="item.title">
+            {{ item.title }}
+            <v-icon size="medium" class="ml-1">{{ item.icon }}</v-icon>
+          </v-btn>
+        </template>
+      </div>
       <v-btn
         icon
-        @click.stop="rightDrawer = !rightDrawer"
+        @click.stop="drawer = !drawer"
       >
         <v-icon>menu</v-icon>
       </v-btn>
@@ -58,23 +56,10 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      fixed
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
+    <v-footer app>
+      <span>
+        &copy; {{ new Date().getUTCFullYear() }} — <a href="https://github.com/creativefls/"><strong>CreativeFLS</strong></a>
+      </span>
     </v-footer>
   </v-app>
 </template>
@@ -83,18 +68,32 @@
   export default {
     data() {
       return {
+        title: 'Vuetify.js',
         clipped: false,
-        drawer: true,
+        drawer: false,
         fixed: false,
         items: [
           { icon: 'apps', title: 'Welcome', to: '/' },
           { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
+        ]
       }
     }
   }
 </script>
+
+<style lang="stylus">
+nav
+  justify-content center
+  padding 6px 0
+  .toolbar__content
+    @media only screen and (min-device-width: 960px)
+      max-width 80%
+  .toolbar__title
+    margin-left 0
+    .avatar.avatar--tile
+      height 36px !important
+      width auto !important
+  .btn
+    text-transform capitalize
+    font-size 16px
+</style>
