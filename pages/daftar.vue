@@ -2,34 +2,78 @@
   <v-layout justify-center>
     <v-flex md8>
       <v-card>
-        <wizard-header></wizard-header>
-        <v-card-text>
-          <nuxt-child></nuxt-child>
-        </v-card-text>
-       <v-card-actions>
-        <v-btn v-if="$store.state.wizardStep > 1" @click="backStep()" round color="primary" outline>Back</v-btn>
-        <v-btn v-if="$store.state.wizardStep < $store.state.wizardMax" @click="nextStep()" round color="primary" depressed>Next</v-btn>
-        <v-btn v-else round color="primary" depressed>Submit</v-btn>
-      </v-card-actions>
-      </v-card>
-    </v-flex>
+        <v-stepper v-model="step">
+          <v-stepper-header class="elevation-0">
+            <v-stepper-step step="1" :complete="step > 1">Name of step 1</v-stepper-step>
+            <v-divider></v-divider>
+            <v-stepper-step step="2" :complete="step > 2">Name of step 2</v-stepper-step>
+            <v-divider></v-divider>
+            <v-stepper-step step="3">Name of step 3</v-stepper-step>
+          </v-stepper-header>
+          <v-stepper-items>
+            <v-stepper-content step="1">
+              <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+            </v-stepper-content>
+            <v-stepper-content step="2">
+              <step-two ref="step2"></step-two>
+            </v-stepper-content>
+            <v-stepper-content step="3">
+              <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+            </v-stepper-content>
+            <wizard-actions class="pb-4 px-4"
+              :step="step"
+              :max-step="stepMax"
+              @next-step="nextStep()"
+              @back-step="backStep()"
+              @finish="submit()"
+            ></wizard-actions>
+            <div class="pb-4 px-4">
+              <v-btn color="primary" @click.native="step += 1">Continue</v-btn>
+              <v-btn flat>Cancel</v-btn>
+            </div>
+          </v-stepper-items>
+        </v-stepper>
 
+      </v-card>
+
+    </v-flex>
   </v-layout>
 </template>
 
 <script>
-import WizardHeader from '@/components/WizardHeader'
-import WizardActions from '@/components/WizardActions'
+import WizardActions from '@/components/daftar/WizardActions'
+import StepTwo from '@/components/daftar/step-2'
 
 export default {
-   methods: {
-    nextStep () {
-      this.$store.dispatch('wizardNext')
-    },
-    backStep () {
-      this.$store.dispatch('wizardBack')
+  data () {
+    return {
+      step: 2,
+      stepMax: 3
     }
   },
-  components: { WizardHeader, WizardActions }
+  methods: {
+    validateStep(name) {
+      if (this.$refs[name].validate()) {
+        alert('oj', typeof name)
+      } else {
+        alert('cul')
+      }
+    },
+    nextStep () {
+      let stepan = eval('step' + this.step)
+      if (this.$refs[step2].validate()) {
+        this.step = this.step + 1
+      } else {
+        alert('lah elol')
+      }
+    },
+    backStep () {
+      this.step = this.step - 1
+    },
+    submit () {
+      alert('SUBMIT CUY !!')
+    }
+  },
+  components: { WizardActions, StepTwo }
 }
 </script>

@@ -211,6 +211,15 @@ export default {
   methods: {
     saveDateOfBirth (date) {
       this.$refs.menu.save(date)
+    },
+    validate () {
+      this.$validator.validateAll().then(() => {
+        if (this.errors.any()) {
+          return false
+        } else {
+          return true
+        }
+      })
     }
   }
 }

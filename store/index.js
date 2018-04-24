@@ -15,13 +15,11 @@ const createStore = () => {
       wizardNext(context) {
         if (context.state.wizardStep < context.state.wizardMax) {
           context.commit('wizardStep', context.state.wizardStep + 1)
-          this.$router.push('/daftar/step-' + context.state.wizardStep)
         }
       },
       wizardBack (context) {
         if (context.state.wizardStep > 1) {
           context.commit('wizardStep', context.state.wizardStep - 1)
-          this.$router.push('/daftar/step-' + context.state.wizardStep)
         }
       }
     },
