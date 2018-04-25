@@ -1,8 +1,8 @@
 <template>
   <v-card-actions>
-    <v-btn v-if="step > 1" @click="backStep()" round color="primary" outline>Kembali</v-btn>
-    <v-btn v-if="step < maxStep" @click="nextStep()" round color="primary" depressed>Lanjut</v-btn>
-    <v-btn v-else @click="finishStep()" round color="primary" depressed>Kirim <v-icon right dark>cloud_upload</v-icon></v-btn>
+    <v-btn v-if="step > 1" @click.stop="backStep()" round color="primary" outline>Kembali</v-btn>
+    <v-btn v-if="step < maxStep" @click.stop="nextStep()" round color="primary" depressed>Lanjut</v-btn>
+    <v-btn v-else @click.stop="finishStep()" round color="primary" depressed>Kirim <v-icon right dark>cloud_upload</v-icon></v-btn>
   </v-card-actions>
 </template>
 
