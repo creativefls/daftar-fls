@@ -159,6 +159,9 @@
 
 <script>
 export default {
+  // inject: {
+  //   $validator: '$validator'
+  // },
   data () {
     return {
       model: {
@@ -213,13 +216,7 @@ export default {
       this.$refs.menu.save(date)
     },
     validate () {
-      this.$validator.validateAll().then(() => {
-        if (this.errors.any()) {
-          return false
-        } else {
-          return true
-        }
-      })
+      return this.$validator.validateAll()
     }
   }
 }

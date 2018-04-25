@@ -3,11 +3,16 @@
     <v-flex md8>
       <v-card>
         <v-card-text>
-          <v-text-field
-            name="input-1"
-            label="Label Text"
-            id="testing"
-          ></v-text-field>
+          <form >
+            <v-text-field
+              v-model="tes"
+              label="Nama Lengkap"
+              data-vv-as="Nama Lengkap"
+              :error-messages="errors.collect('tes')"
+              v-validate="'required'"
+              data-vv-name="tes"
+            ></v-text-field>
+          </form>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -18,9 +23,14 @@
 <script>
 
 export default {
+  data () {
+    return {
+      tes: ''
+    }
+  },
   methods: {
     validate () {
-      return false
+      return this.$validator.validateAll()
     }
   }
 }

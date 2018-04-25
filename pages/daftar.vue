@@ -12,7 +12,7 @@
           </v-stepper-header>
           <v-stepper-items>
             <v-stepper-content step="1">
-              <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+              <step-one ref="step1"></step-one>
             </v-stepper-content>
             <v-stepper-content step="2">
               <step-two ref="step2"></step-two>
@@ -27,10 +27,6 @@
               @back-step="backStep()"
               @finish="submit()"
             ></wizard-actions>
-            <div class="pb-4 px-4">
-              <v-btn color="primary" @click.native="step += 1">Continue</v-btn>
-              <v-btn flat>Cancel</v-btn>
-            </div>
           </v-stepper-items>
         </v-stepper>
 
@@ -42,30 +38,47 @@
 
 <script>
 import WizardActions from '@/components/daftar/WizardActions'
+import StepOne from '@/components/daftar/step-1'
 import StepTwo from '@/components/daftar/step-2'
 
 export default {
+  // provide: function () {
+  //   return {
+  //     $validator: this.$validator
+  //   }
+  // },
   data () {
     return {
-      step: 2,
+      finalModel: {},
+      step: 1,
       stepMax: 3
     }
   },
   methods: {
     validateStep(name) {
-      if (this.$refs[name].validate()) {
-        alert('oj', typeof name)
-      } else {
-        alert('cul')
-      }
+      this.$refs[name].validate().then((result) => {
+        console.log('name', typeof name, result)
+        if (!result) {
+          alert('Terdapat kesalahan di inputan')
+        } else {
+          alert('OK lanjut')
+            this.step = this.step + 1
+        }
+      })
+      // if (this.$refs[name].validate()) {
+      //   alert('oj', typeof name)
+      // } else {
+      //   alert('cul')
+      // }
     },
     nextStep () {
-      let stepan = eval('step' + this.step)
-      if (this.$refs[step2].validate()) {
-        this.step = this.step + 1
-      } else {
-        alert('lah elol')
-      }
+      // let stepan = eval('step' + this.step)
+      // if (this.$refs['step2'].validate()) {
+      //   this.step = this.step + 1
+      // } else {
+      //   alert('lah elol')
+      // }
+      this.validateStep('step' + this.step)
     },
     backStep () {
       this.step = this.step - 1
@@ -74,6 +87,6 @@ export default {
       alert('SUBMIT CUY !!')
     }
   },
-  components: { WizardActions, StepTwo }
+  components: { WizardActions, StepTwo, StepOne }
 }
 </script>
