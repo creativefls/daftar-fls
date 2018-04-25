@@ -216,7 +216,11 @@ export default {
       this.$refs.menu.save(date)
     },
     validate () {
-      return this.$validator.validateAll()
+      return new Promise((resolve, reject) => {
+        this.$validator.validateAll().then((valid) => {
+          resolve({ valid: valid, model: this.model });
+        });
+      })
     }
   }
 }

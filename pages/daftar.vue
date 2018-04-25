@@ -56,28 +56,18 @@ export default {
   },
   methods: {
     validateStep(name) {
-      this.$refs[name].validate().then((result) => {
-        console.log('name', typeof name, result)
-        if (!result) {
-          alert('Terdapat kesalahan di inputan')
-        } else {
+      this.$refs[name].validate().then(({valid, model}) => {
+        console.log('name', typeof name, valid, JSON.stringify(model))
+        if (valid) {
           alert('OK lanjut')
-            this.step = this.step + 1
+          this.finalModel = { ...this.finalModel, ...model };
+          this.step = this.step + 1
+        } else {
+          alert('Terdapat kesalahan di inputan')
         }
       })
-      // if (this.$refs[name].validate()) {
-      //   alert('oj', typeof name)
-      // } else {
-      //   alert('cul')
-      // }
     },
     nextStep () {
-      // let stepan = eval('step' + this.step)
-      // if (this.$refs['step2'].validate()) {
-      //   this.step = this.step + 1
-      // } else {
-      //   alert('lah elol')
-      // }
       this.validateStep('step' + this.step)
     },
     backStep () {

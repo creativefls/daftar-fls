@@ -5,7 +5,7 @@
         <v-card-text>
           <form >
             <v-text-field
-              v-model="tes"
+              v-model="model.tes"
               label="Nama Lengkap"
               data-vv-as="Nama Lengkap"
               :error-messages="errors.collect('tes')"
@@ -25,12 +25,16 @@
 export default {
   data () {
     return {
-      tes: ''
+      model: {}
     }
   },
   methods: {
     validate () {
-      return this.$validator.validateAll()
+      return new Promise((resolve, reject) => {
+        this.$validator.validateAll().then((valid) => {
+          resolve({ valid: valid, model: this.model });
+        });
+      })
     }
   }
 }
