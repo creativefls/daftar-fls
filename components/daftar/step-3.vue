@@ -4,7 +4,7 @@
     <v-card v-for="(organization, index) in model.organizations" :key="index" class="fls-form-group elevation-3 my-2">
       <v-card-title>
         <v-spacer></v-spacer>
-        <v-btn color="error" small icon @click="removeFormOrganization(index)"><v-icon small>delete</v-icon></v-btn>
+        <v-btn v-if="index > 0" color="error" small icon @click="removeFormOrganization(index)"><v-icon small>delete</v-icon></v-btn>
       </v-card-title>
       <v-card-text>
         <v-text-field
