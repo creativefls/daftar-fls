@@ -1,28 +1,19 @@
 <template>
-  <v-layout justify-center>
-    <v-flex md8>
-      <v-card>
-        <wizard-header></wizard-header>
-        <v-card-text>
-          <v-text-field
-            name="input-1"
-            label="Label Text"
-            id="testing"
-          ></v-text-field>
-        </v-card-text>
-        <wizard-actions/>
-      </v-card>
-    </v-flex>
-
-  </v-layout>
+  <div>
+    step7
+  </div>
 </template>
 
 <script>
-import WizardHeader from '@/components/WizardHeader'
-import WizardActions from '@/components/WizardActions'
-
 export default {
-
-  components: { WizardHeader, WizardActions }
+  methods: {
+    validate () {
+      return new Promise((resolve, reject) => {
+        this.$validator.validateAll().then((valid) => {
+          resolve({ valid: valid, model: this.model });
+        });
+      })
+    }
+  }
 }
 </script>

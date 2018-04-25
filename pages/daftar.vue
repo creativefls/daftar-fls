@@ -1,8 +1,9 @@
 <template>
   <v-layout justify-center>
     <v-flex md8>
-      <v-card>
+      <v-card class="card-wizard">
         <v-stepper v-model="step">
+
           <v-stepper-header class="elevation-0">
             <v-stepper-step step="1" :complete="step > 1"></v-stepper-step>
             <v-divider :class="{complete: step > 1}"></v-divider>
@@ -16,9 +17,11 @@
             <v-divider :class="{complete: step > 5}"></v-divider>
             <v-stepper-step step="6" :complete="step > 6"></v-stepper-step>
           </v-stepper-header>
+
           <h2 class="headline text-xs-center">
             {{ formTitle }}
           </h2>
+
           <v-stepper-items>
             <v-stepper-content step="1">
               <step-one ref="step1"></step-one>
@@ -27,8 +30,18 @@
               <step-two ref="step2"></step-two>
             </v-stepper-content>
             <v-stepper-content step="3">
-              <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+              <step-three ref="step3"></step-three>
             </v-stepper-content>
+            <v-stepper-content step="4">
+              <step-four ref="step4"></step-four>
+            </v-stepper-content>
+            <v-stepper-content step="5">
+              <step-five ref="step5"></step-five>
+            </v-stepper-content>
+            <v-stepper-content step="6">
+              <step-six ref="step6"></step-six>
+            </v-stepper-content>
+
             <wizard-actions class="pb-4 px-4"
               :step="step"
               :max-step="stepMax"
@@ -37,10 +50,9 @@
               @finish="submit()"
             ></wizard-actions>
           </v-stepper-items>
+
         </v-stepper>
-
       </v-card>
-
     </v-flex>
   </v-layout>
 </template>
@@ -49,12 +61,16 @@
 import WizardActions from '@/components/daftar/WizardActions'
 import StepOne from '@/components/daftar/step-1'
 import StepTwo from '@/components/daftar/step-2'
+import StepThree from '@/components/daftar/step-3'
+import StepFour from '@/components/daftar/step-4'
+import StepFive from '@/components/daftar/step-5'
+import StepSix from '@/components/daftar/step-6'
 
 export default {
   data () {
     return {
       formModel: {},
-      step: 1,
+      step: 3,
       stepMax: 6
     }
   },
@@ -74,13 +90,12 @@ export default {
     validateStep(name) {
       this.$refs[name].validate().then(({valid, model}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
-        // if (valid) {
-        //   this.formModel = { ...this.formModel, ...model };
-        //   this.step = this.step + 1
-        // } else {
-        //   alert('Terdapat kesalahan di inputan')
-        // }
+        if (valid) {
+          this.formModel = { ...this.formModel, ...model };
           this.step = this.step + 1
+        } else {
+          alert('Terdapat kesalahan di inputan')
+        }
       })
     },
     nextStep () {
@@ -93,7 +108,7 @@ export default {
       alert('SUBMIT CUY !!')
     }
   },
-  components: { WizardActions, StepTwo, StepOne }
+  components: { WizardActions, StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix }
 }
 </script>
 
