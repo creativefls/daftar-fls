@@ -159,9 +159,6 @@
 
 <script>
 export default {
-  // inject: {
-  //   $validator: '$validator'
-  // },
   data () {
     return {
       model: {
