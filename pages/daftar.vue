@@ -47,7 +47,7 @@
               :max-step="stepMax"
               @next-step="nextStep()"
               @back-step="backStep()"
-              @finish="submit()"
+              @finish="finishStep()"
             ></wizard-actions>
           </v-stepper-items>
 
@@ -67,6 +67,11 @@ import StepFive from '@/components/daftar/step-5'
 import StepSix from '@/components/daftar/step-6'
 
 export default {
+  provide: function () {
+    return {
+      formModel: this.formModel
+    }
+  },
   data () {
     return {
       formModel: {},
@@ -82,7 +87,7 @@ export default {
         case 3: return 'Organisasi'
         case 4: return 'Prestasi'
         case 5: return 'Aktifitas Sosial'
-        case 6: return 'Essay'
+        case 6: return 'Pertanyaan'
       }
     }
   },
@@ -98,14 +103,25 @@ export default {
         }
       })
     },
+    validateFinish(name) {
+      this.$refs[name].validate().then(({valid, model}) => {
+        console.log('name', typeof name, valid, JSON.stringify(model))
+        if (valid) {
+          this.formModel = { ...this.formModel, ...model };
+          alert('finishStep CUY !! \n' + JSON.stringify(this.formModel))
+        } else {
+          alert('Terdapat kesalahan di inputan')
+        }
+      })
+    },
     nextStep () {
       this.validateStep('step' + this.step)
     },
     backStep () {
       this.step = this.step - 1
     },
-    submit () {
-      alert('SUBMIT CUY !!')
+    finishStep () {
+      this.validateFinish('step' + this.step)
     }
   },
   components: { WizardActions, StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix }
