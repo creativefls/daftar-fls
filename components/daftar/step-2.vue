@@ -116,7 +116,6 @@
     <div class="title primary__dark--text my-2">Kontak</div>
     <v-text-field
       v-model="model.phone"
-      type="number"
       label="Nomor Telepon"
       data-vv-as="Nomor Telepon"
       :error-messages="errors.collect('phone')"
