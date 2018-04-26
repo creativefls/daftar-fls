@@ -56,7 +56,7 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer app>
+    <v-footer>
       <span>
         &copy; {{ new Date().getUTCFullYear() }} — <a href="https://github.com/creativefls/"><strong>CreativeFLS</strong></a>
       </span>
@@ -96,4 +96,7 @@ nav
   .btn
     text-transform capitalize
     font-size 16px
+
+main.content
+  background #3a2942
 </style>
