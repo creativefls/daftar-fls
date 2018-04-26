@@ -71,7 +71,7 @@
       item-value="text"
     ></v-select>
 
-    <div class="title primary__dark--text my-2">Alamat</div>
+    <div class="title primary__dark--text my-2">Alamat Domisili</div>
     <v-select
       :items="provinceItems"
       v-model="model.province"
@@ -97,10 +97,8 @@
       :error-messages="errors.collect('address')"
       v-validate="'required'"
       data-vv-name="address"
-      data-vv-as="Alamat Domisili"
-      textarea
-      rows="3"
-      label="Alamat Domisili">
+      data-vv-as="Alamat"
+      label="Alamat">
     </v-text-field>
 
     <div class="title primary__dark--text my-2">Institusi</div>
