@@ -91,6 +91,13 @@ export default {
       }
     }
   },
+  watch: {
+    formModel () {
+      if (this.formModel.room1) {
+        this.$store.commit('roomSelected', this.formModel.room1)
+      }
+    }
+  },
   methods: {
     validateStep(name) {
       this.$refs[name].validate().then(({valid, model}) => {
