@@ -18,7 +18,7 @@
             <v-stepper-step step="6" :complete="step > 6"></v-stepper-step>
           </v-stepper-header>
 
-          <h2 class="headline text-xs-center">
+          <h2 class="headline text-xs-center primary__dark--text">
             {{ stepTitle }}
           </h2>
 

@@ -11,6 +11,7 @@ Vue.use(Vuetify, {
     success: '#2ecc71',
     warning: '#f1c40f',
     cloud: '#ecf0f1',
-    silver: '#bdc3c7'
+    silver: '#bdc3c7',
+    primary__dark: '#574060'
   }
 })

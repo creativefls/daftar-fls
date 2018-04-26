@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-subheader>Data Diri</v-subheader>
-    <v-divider></v-divider>
+    <div class="title primary__dark--text my-2">Data Diri</div>
 
     <v-text-field
       v-model="model.fullName"
@@ -72,8 +71,7 @@
       item-value="text"
     ></v-select>
 
-    <v-subheader>Alamat</v-subheader>
-    <v-divider></v-divider>
+    <div class="title primary__dark--text my-2">Alamat</div>
     <v-select
       :items="provinceItems"
       v-model="model.province"
@@ -105,8 +103,7 @@
       label="Alamat Domisili">
     </v-text-field>
 
-    <v-subheader>Institusi</v-subheader>
-    <v-divider></v-divider>
+    <div class="title primary__dark--text my-2">Institusi</div>
     <v-select
       :items="institutionItems"
       v-model="model.institution"
@@ -118,8 +115,7 @@
       item-value="text"
     ></v-select>
 
-    <v-subheader>Kontak</v-subheader>
-    <v-divider></v-divider>
+    <div class="title primary__dark--text my-2">Kontak</div>
     <v-text-field
       v-model="model.phone"
       label="Nomor Telepon"
