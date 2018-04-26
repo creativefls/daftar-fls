@@ -4,7 +4,7 @@
     <v-card v-for="(socialActivity, index) in model.socialActivities" :key="index" class="fls-form-group my-2">
       <v-card-title>
         <v-spacer></v-spacer>
-        <v-btn v-if="index > 0" color="error" small icon @click="removeFormSocialActivity(index)"><v-icon small>delete</v-icon></v-btn>
+        <v-btn v-if="model.socialActivities.length > 1" color="error" small icon @click="removeFormSocialActivity(index)"><v-icon small>delete</v-icon></v-btn>
       </v-card-title>
       <v-card-text>
         <v-text-field
