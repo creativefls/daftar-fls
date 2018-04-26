@@ -19,7 +19,7 @@
           </v-stepper-header>
 
           <h2 class="headline text-xs-center">
-            {{ formTitle }}
+            {{ stepTitle }}
           </h2>
 
           <v-stepper-items>
@@ -70,12 +70,12 @@ export default {
   data () {
     return {
       formModel: {},
-      step: 3,
+      step: 1,
       stepMax: 6
     }
   },
   computed: {
-    formTitle () {
+    stepTitle () {
       switch (this.step) {
         case 1: return 'Pilihan Room'
         case 2: return 'Identitas Pribadi'
