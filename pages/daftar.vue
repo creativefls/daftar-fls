@@ -54,6 +54,23 @@
         </v-stepper>
       </v-card>
     </v-flex>
+    <v-dialog v-model="dialog" scrollable max-width="80%">
+      <v-card>
+        <v-card-title class="headline">Kirim form daftar FLS 2018</v-card-title>
+        <v-card-text>
+          Sebelum submit data inputannya ditampilin dulu buat konfirmasi, <br>maaf ya belum sempet bikin tampilannya ^_^'
+          <br>
+          <pre>
+            {{ formModel }}
+          </pre>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" round outline @click.native="dialog = false">Kembali</v-btn>
+          <v-btn color="primary" round depressed @click.native="dialog = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-layout>
 </template>
 
@@ -75,6 +92,7 @@ export default {
   data () {
     return {
       formModel: {},
+      dialog: false,
       step: 1,
       stepMax: 6
     }
@@ -115,7 +133,7 @@ export default {
         console.log('name', typeof name, valid, JSON.stringify(model))
         if (valid) {
           this.formModel = { ...this.formModel, ...model };
-          alert('finishStep CUY !! \n' + JSON.stringify(this.formModel))
+          this.dialog = !this.dialog
         } else {
           alert('Terdapat kesalahan di inputan')
         }
