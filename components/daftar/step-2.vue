@@ -74,23 +74,28 @@
     <div class="title primary__dark--text my-2">Alamat Domisili</div>
     <v-select
       :items="provinceItems"
+      item-value="name"
+      item-text="name"
+      return-object
+      :loading="loadingProvince"
       v-model="model.province"
       data-vv-as="Provinsi"
       :error-messages="errors.collect('province')"
       v-validate="'required'"
       data-vv-name="province"
       label="Provinsi"
-      item-value="text"
     ></v-select>
     <v-select
       :items="regencyItems"
+      item-value="name"
+      item-text="name"
+      :loading="loadingRegency"
       v-model="model.regency"
       data-vv-as="Kota/Kabupaten"
       :error-messages="errors.collect('regency')"
       v-validate="'required'"
       data-vv-name="regency"
       label="Kota/Kabupaten"
-      item-value="text"
     ></v-select>
     <v-text-field
       v-model="model.domicileAddress"
@@ -110,8 +115,12 @@
       v-validate="'required'"
       data-vv-name="institution"
       label="Sekolah/Universitas"
-      item-value="text"
-    ></v-select>
+      :loading="loadingUniversity"
+      item-value="name"
+      item-text="name"
+    >
+      <div slot="no-data">anu</div>
+    </v-select>
 
     <div class="title primary__dark--text my-2">Kontak</div>
     <v-text-field
@@ -173,34 +182,25 @@ export default {
           instagram: ''
         },
       },
-      regencyItems: [
-        'semarnang',
-        'solo',
-        'demak',
-        'kudus'
-      ],
+      loadingProvince: false,
+      loadingRegency: false,
+      loadingUniversity: false,
+      regencyItems: [],
       genderItems: [
         'Laki-Laki',
         'Perempuan'
       ],
-      provinceItems: [
-        'semarnang',
-        'solo',
-        'demak',
-        'kudus'
-      ],
-      institutionItems: [
-        'semarnang',
-        'solo',
-        'demak',
-        'kudus'
-      ],
+      provinceItems: [],
+      institutionItems: [],
       menuDateOfBirth: false
     }
   },
   watch: {
     menuDateOfBirth (val) {
       val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+    },
+    'model.province' (val) {
+      if (val) this.fetchDataRegencies()
     }
   },
   methods: {
@@ -213,7 +213,54 @@ export default {
           resolve({ valid: valid, model: this.model });
         });
       })
+    },
+    fetchDataUniversities () {
+      this.loadingUniversity = true
+      this.$axios.get('http://128.199.72.101:3000/api/datauniversities').then(response => {
+        console.log('provinsi ', response.data);
+        this.institutionItems = response.data
+        this.loadingUniversity = false
+      }).catch(error => {
+        console.log('err provinsi ', error)
+        this.loadingUniversity = false
+      })
+    },
+    fetchDataProvinces () {
+      this.loadingProvince = true
+      this.$axios.get('http://128.199.72.101:3000/api/dataprovinces').then(response => {
+        console.log('provinsi ', response.data);
+        this.provinceItems = response.data
+        this.loadingProvince = false
+      }).catch(error => {
+        console.log('err provinsi ', error)
+        this.loadingProvince = false
+      })
+    },
+    fetchDataRegencies () {
+      this.loadingRegency = true
+      this.regencyItems = []
+      this.model.regency =  ''
+      this.$axios.get('http://128.199.72.101:3000/api/dataregencies', {
+        params: {
+          filter: {
+            where: {
+              provinceId: this.model.province.selfId || '100'
+            }
+          }
+        }
+      }).then(response => {
+        console.log('regency ', response.data);
+        this.regencyItems = response.data
+        this.loadingRegency = false
+      }).catch(error => {
+        console.log('err regency ', error)
+        this.loadingRegency = false
+      })
     }
+  },
+  mounted () {
+    this.fetchDataProvinces()
+    this.fetchDataUniversities()
   }
 }
 </script>
