@@ -21,7 +21,7 @@
     ></v-text-field>
 
     <v-select
-      :items="cityItems"
+      :items="regencyItems"
       v-model="model.placeOfBirth"
       data-vv-as="Tempat Lahir"
       :error-messages="errors.collect('placeOfBirth')"
@@ -83,12 +83,12 @@
       item-value="text"
     ></v-select>
     <v-select
-      :items="cityItems"
-      v-model="model.city"
+      :items="regencyItems"
+      v-model="model.regency"
       data-vv-as="Kota/Kabupaten"
-      :error-messages="errors.collect('city')"
+      :error-messages="errors.collect('regency')"
       v-validate="'required'"
-      data-vv-name="city"
+      data-vv-name="regency"
       label="Kota/Kabupaten"
       item-value="text"
     ></v-select>
@@ -164,7 +164,7 @@ export default {
         gender: '',
         domicileAddress: '',
         province: '',
-        city: '',
+        regency: '',
         institution: '',
         phone: '',
         email: '',
@@ -173,7 +173,7 @@ export default {
           instagram: ''
         },
       },
-      cityItems: [
+      regencyItems: [
         'semarnang',
         'solo',
         'demak',
