@@ -12,7 +12,7 @@
           label="Kegiatan"
           data-vv-as="Kegiatan"
           :error-messages="errors.collect('name' + index)"
-          v-validate="'required'"
+          v-validate="''"
           :data-vv-name="'name' + index"
           required
         ></v-text-field>
@@ -21,7 +21,7 @@
           v-model="socialActivity.level"
           data-vv-as="Tingkat"
           :error-messages="errors.collect('level' + index)"
-          v-validate="'required'"
+          v-validate="''"
           :data-vv-name="'level' + index"
           label="Tingkat"
         ></v-select>
@@ -31,7 +31,7 @@
           label="Tahun"
           data-vv-as="Tahun"
           :error-messages="errors.collect('year' + index)"
-          v-validate="'required'"
+          v-validate="''"
           :data-vv-name="'year' + index"
           required
         ></v-select>

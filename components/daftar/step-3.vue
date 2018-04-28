@@ -12,7 +12,7 @@
           label="Nama Organisasi"
           data-vv-as="Nama Organisasi"
           :error-messages="errors.collect('name' + index)"
-          v-validate="'required'"
+          v-validate="''"
           :data-vv-name="'name' + index"
           required
         ></v-text-field>
@@ -21,7 +21,7 @@
           v-model="organization.level"
           data-vv-as="Tingkat"
           :error-messages="errors.collect('level' + index)"
-          v-validate="'required'"
+          v-validate="''"
           :data-vv-name="'level' + index"
           label="Tingkat"
         ></v-select>
@@ -39,7 +39,7 @@
           label="Periode"
           data-vv-as="Periode"
           :error-messages="errors.collect('period' + index)"
-          v-validate="'required'"
+          v-validate="''"
           :data-vv-name="'period' + index"
           required
         ></v-text-field>
