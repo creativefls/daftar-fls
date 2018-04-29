@@ -141,6 +141,7 @@ export default {
         console.log('submit ', response.data);
         this.institutionItems = response.data
         this.loadingSubmit = false
+        this.dialog = false
         this.formModel = {}
         this.step = 1
       }).catch(function (error) {
