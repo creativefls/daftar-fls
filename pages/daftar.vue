@@ -67,7 +67,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" round outline @click.native="dialog = false">Kembali</v-btn>
-          <v-btn color="primary" round depressed @click.native="dialog = false">OK</v-btn>
+          <v-btn color="primary" round :loading="loadingSubmit" depressed @click.native="submitData()">OK</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -84,17 +84,13 @@ import StepFive from '@/components/daftar/step-5'
 import StepSix from '@/components/daftar/step-6'
 
 export default {
-  provide: function () {
-    return {
-      formModel: this.formModel
-    }
-  },
   data () {
     return {
       formModel: {},
       dialog: false,
       step: 1,
-      stepMax: 6
+      stepMax: 6,
+      loadingSubmit: false
     }
   },
   computed: {
@@ -117,6 +113,60 @@ export default {
     }
   },
   methods: {
+    submitData () {
+      this.loadingSubmit = true
+
+      this.$axios.post('http://128.199.72.101:3000/api/registrars', {
+        roomFirst: this.formModel.room1,
+        roomSecond: this.formModel.room1,
+        fullname: this.formModel.fullName,
+        nickname: this.formModel.nickName,
+        placeOfBirth: this.formModel.placeOfBirth,
+        dateOfBirth: this.formModel.dateOfBirth,
+        gender: this.formModel.gender,
+        domicileAddress: this.formModel.domicileAddress,
+        province: this.formModel.province.name,
+        achevements: this.formModel.achievements,
+        city: this.formModel.regency,
+        institution: this.formModel.institution,
+        phone: this.formModel.phone,
+        email: this.formModel.email,
+        socmed: this.formModel.socmed,
+        organizations: this.formModel.organizations,
+        socialActivities: this.formModel.organizations,
+        essayMotivationJoin: this.formModel.essayMotivationJoin,
+        essayRoomSelected: this.formModel.essayRoomSelected,
+        essayCaseStudy: this.formModel.essayCaseStudy
+      }).then(response => {
+        console.log('submit ', response.data);
+        this.institutionItems = response.data
+        this.loadingSubmit = false
+        this.formModel = {}
+        this.step = 1
+      }).catch(function (error) {
+        console.log('--- awh error ----')
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log('--- error respon ----')
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log('--- error request ----')
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('--- error lain ----')
+          console.log('Error', error.message);
+        }
+        console.log('--- error konfig ----')
+        console.log(error.config);
+      });
+    },
     validateStep(name) {
       this.$refs[name].validate().then(({valid, model}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
