@@ -21,14 +21,16 @@
     ></v-text-field>
 
     <v-select
-      :items="regencyItems"
+      :items="provinceItems"
       v-model="model.placeOfBirth"
       data-vv-as="Tempat Lahir"
       :error-messages="errors.collect('placeOfBirth')"
       v-validate="'required'"
       data-vv-name="placeOfBirth"
       label="Tempat Lahir"
-      item-value="text"
+      :loading="loadingProvince"
+      item-value="name"
+      item-text="name"
     ></v-select>
 
     <v-menu
@@ -182,9 +184,11 @@ export default {
           instagram: ''
         },
       },
+      loadingPlaceOfBirth: false,
       loadingProvince: false,
       loadingRegency: false,
       loadingUniversity: false,
+      placeOfBirthItems: [],
       regencyItems: [],
       genderItems: [
         'Laki-Laki',
@@ -212,6 +216,21 @@ export default {
         this.$validator.validateAll().then((valid) => {
           resolve({ valid: valid, model: this.model });
         });
+      })
+    },
+    fetchDataPlaceOfBirth () {
+      this.loadingPlaceOfBirth = true
+      this.$axios.get('http://128.199.72.101:3000/api/dataregencies', {
+        filter: {
+          limit: 20
+        }
+      }).then(response => {
+        console.log('tmpt lahir ', response.data);
+        this.placeOfBirthItems = response.data
+        this.loadingPlaceOfBirth = false
+      }).catch(error => {
+        console.log('err tmpt lahir ', error)
+        this.loadingPlaceOfBirth = false
       })
     },
     fetchDataUniversities () {
@@ -261,6 +280,7 @@ export default {
   mounted () {
     this.fetchDataProvinces()
     this.fetchDataUniversities()
+    // this.fetchDataPlaceOfBirth()
   }
 }
 </script>
