@@ -73,8 +73,8 @@
         drawer: false,
         fixed: false,
         items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
+          { icon: 'apps', title: 'Menu', to: '/' },
+          { icon: 'bubble_chart', title: 'Coba menu', to: '/inspire' }
         ]
       }
     }
