@@ -62,6 +62,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    vendor: ['babel-polyfill'],
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
