@@ -4,7 +4,7 @@
     <v-card v-for="(organization, index) in model.organizations" :key="index" class="fls-form-group elevation-3 my-2">
       <v-card-title>
         <v-spacer></v-spacer>
-        <v-btn v-if="model.organizations.length > 1" color="error" small icon @click="removeFormOrganization(index)"><v-icon small>delete</v-icon></v-btn>
+        <v-btn color="error" small icon @click="removeFormOrganization(index)"><v-icon small>delete</v-icon></v-btn>
       </v-card-title>
       <v-card-text>
         <v-text-field
@@ -12,7 +12,7 @@
           label="Nama Organisasi"
           data-vv-as="Nama Organisasi"
           :error-messages="errors.collect('name' + index)"
-          v-validate="''"
+          v-validate="'required'"
           :data-vv-name="'name' + index"
           required
         ></v-text-field>
@@ -21,7 +21,7 @@
           v-model="organization.level"
           data-vv-as="Tingkat"
           :error-messages="errors.collect('level' + index)"
-          v-validate="''"
+          v-validate="'required'"
           :data-vv-name="'level' + index"
           label="Tingkat"
         ></v-select>
@@ -30,7 +30,7 @@
           v-model="organization.position"
           data-vv-as="Jabatan"
           :error-messages="errors.collect('position' + index)"
-          v-validate="''"
+          v-validate="'required'"
           :data-vv-name="'position' + index"
           label="Jabatan"
         ></v-select>
@@ -39,7 +39,7 @@
           label="Periode"
           data-vv-as="Periode"
           :error-messages="errors.collect('period' + index)"
-          v-validate="''"
+          v-validate="'required'"
           :data-vv-name="'period' + index"
           required
         ></v-text-field>
@@ -55,12 +55,7 @@ export default {
   data () {
     return {
       model: {
-        organizations: [{
-          name: '',
-          period: '',
-          level: '',
-          position: ''
-        }]
+        organizations: []
       },
       positionItems: [
         'Ketua',
@@ -95,7 +90,7 @@ export default {
       }
     },
     removeFormOrganization (index) {
-      if (this.model.organizations.length > 1) this.model.organizations.splice(index, 1)
+      this.model.organizations.splice(index, 1)
     },
     validate () {
       return new Promise((resolve, reject) => {

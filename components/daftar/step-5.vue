@@ -4,7 +4,7 @@
     <v-card v-for="(socialActivity, index) in model.socialActivities" :key="index" class="fls-form-group my-2">
       <v-card-title>
         <v-spacer></v-spacer>
-        <v-btn v-if="model.socialActivities.length > 1" color="error" small icon @click="removeFormSocialActivity(index)"><v-icon small>delete</v-icon></v-btn>
+        <v-btn color="error" small icon @click="removeFormSocialActivity(index)"><v-icon small>delete</v-icon></v-btn>
       </v-card-title>
       <v-card-text>
         <v-text-field
@@ -12,7 +12,7 @@
           label="Kegiatan"
           data-vv-as="Kegiatan"
           :error-messages="errors.collect('name' + index)"
-          v-validate="''"
+          v-validate="'required'"
           :data-vv-name="'name' + index"
           required
         ></v-text-field>
@@ -21,7 +21,7 @@
           v-model="socialActivity.level"
           data-vv-as="Tingkat"
           :error-messages="errors.collect('level' + index)"
-          v-validate="''"
+          v-validate="'required'"
           :data-vv-name="'level' + index"
           label="Tingkat"
         ></v-select>
@@ -31,7 +31,7 @@
           label="Tahun"
           data-vv-as="Tahun"
           :error-messages="errors.collect('year' + index)"
-          v-validate="''"
+          v-validate="'required'"
           :data-vv-name="'year' + index"
           required
         ></v-select>
@@ -47,11 +47,7 @@ export default {
   data () {
     return {
       model: {
-        socialActivities: [{
-          name: '',
-          year: '',
-          level: ''
-        }]
+        socialActivities: []
       },
       levelItems: [
         'Internasional',
@@ -81,7 +77,7 @@ export default {
       }
     },
     removeFormSocialActivity (index) {
-      if (this.model.socialActivities.length > 1) this.model.socialActivities.splice(index, 1)
+      this.model.socialActivities.splice(index, 1)
     },
     validate () {
       return new Promise((resolve, reject) => {
