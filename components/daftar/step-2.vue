@@ -57,7 +57,7 @@
         ref="picker"
         v-model="model.dateOfBirth"
         @change="saveDateOfBirth"
-        min="1980-01-01"
+        min="1993-01-01"
         :max="new Date().toISOString().substr(0, 10)"
       ></v-date-picker>
     </v-menu>
