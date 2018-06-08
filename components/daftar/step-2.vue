@@ -70,7 +70,8 @@
       v-validate="'required'"
       data-vv-name="gender"
       label="Jenis Kelamin"
-      item-value="text"
+      item-value="name"
+      item-text="alias"
     ></v-select>
 
     <div class="title primary__dark--text my-2">Alamat Domisili</div>
@@ -191,8 +192,8 @@ export default {
       placeOfBirthItems: [],
       regencyItems: [],
       genderItems: [
-        'Laki-Laki',
-        'Perempuan'
+        { name: 'male', alias: 'Laki-Laki' },
+        { name: 'female', alias: 'Perempuan' }
       ],
       provinceItems: [],
       institutionItems: [],
