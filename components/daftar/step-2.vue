@@ -21,14 +21,17 @@
     ></v-text-field>
 
     <v-select
-      :items="provinceItems"
+      :items="placeOfBirthItems"
+      :search-input.sync="searchPlaceOfBirth"
+      autocomplete
+      cache-items
       v-model="model.placeOfBirth"
       data-vv-as="Tempat Lahir"
       :error-messages="errors.collect('placeOfBirth')"
       v-validate="'required'"
       data-vv-name="placeOfBirth"
       label="Tempat Lahir"
-      :loading="loadingProvince"
+      :loading="loadingPlaceOfBirth"
       item-value="name"
       item-text="name"
     ></v-select>
@@ -112,6 +115,9 @@
     <div class="title primary__dark--text my-2">Institusi</div>
     <v-select
       :items="institutionItems"
+      :search-input.sync="searchInstitutions"
+      autocomplete
+      cache-items
       v-model="model.institution"
       data-vv-as="Sekolah/Universitas"
       :error-messages="errors.collect('institution')"
@@ -190,6 +196,7 @@ export default {
       loadingRegency: false,
       loadingUniversity: false,
       placeOfBirthItems: [],
+      searchPlaceOfBirth: '',
       regencyItems: [],
       genderItems: [
         { name: 'male', alias: 'Laki-Laki' },
@@ -197,6 +204,7 @@ export default {
       ],
       provinceItems: [],
       institutionItems: [],
+      searchInstitutions: '',
       menuDateOfBirth: false
     }
   },
@@ -206,6 +214,12 @@ export default {
     },
     'model.province' (val) {
       if (val) this.fetchDataRegencies()
+    },
+    searchPlaceOfBirth (e) {
+      e && this.fetchDataPlaceOfBirth()
+    },
+    searchInstitutions (e) {
+      e && this.fetchDataUniversities()
     }
   },
   methods: {
@@ -222,8 +236,14 @@ export default {
     fetchDataPlaceOfBirth () {
       this.loadingPlaceOfBirth = true
       this.$axios.get('http://128.199.72.101:3000/api/dataregencies', {
-        filter: {
-          limit: 20
+        params: {
+          filter: {
+            limit: 20,
+            where: {
+              // options untuk supaya case insensitive -> regex
+              name: { like: this.searchPlaceOfBirth + '.*', options: 'i' }
+            }
+          }
         }
       }).then(response => {
         console.log('tmpt lahir ', response.data);
@@ -236,7 +256,17 @@ export default {
     },
     fetchDataUniversities () {
       this.loadingUniversity = true
-      this.$axios.get('http://128.199.72.101:3000/api/datauniversities').then(response => {
+      this.$axios.get('http://128.199.72.101:3000/api/datauniversities', {
+        params: {
+          filter: {
+            limit: 20,
+            where: {
+              // options untuk supaya case insensitive -> regex
+              name: { like: this.searchInstitutions + '.*', options: 'i' }
+            }
+          }
+        }
+      }).then(response => {
         console.log('provinsi ', response.data);
         this.institutionItems = response.data
         this.loadingUniversity = false
@@ -280,8 +310,6 @@ export default {
   },
   mounted () {
     this.fetchDataProvinces()
-    this.fetchDataUniversities()
-    // this.fetchDataPlaceOfBirth()
   }
 }
 </script>
