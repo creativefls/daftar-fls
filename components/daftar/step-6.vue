@@ -6,8 +6,8 @@
       data-vv-as="Pertanyaan"
       :error-messages="errors.collect('motivationJoin')"
       multi-line
-      counter="300"
-      v-validate="'required'"
+      counter="1500"
+      v-validate="'required|max:1500'"
       data-vv-name="motivationJoin"
       placeholder="Motivasi"
       class="pa-0"
@@ -19,8 +19,8 @@
       data-vv-as="Pertanyaan"
       :error-messages="errors.collect('roomSelected')"
       multi-line
-      counter="300"
-      v-validate="'required'"
+      counter="1500"
+      v-validate="'required|max:1500'"
       data-vv-name="roomSelected"
       placeholder="Alasan"
       class="pa-0"
@@ -34,8 +34,8 @@
       data-vv-as="Studi kasus"
       :error-messages="errors.collect('caseStudy')"
       multi-line
-      counter="500"
-      v-validate="'required'"
+      counter="1500"
+      v-validate="'required|max:1500'"
       data-vv-name="caseStudy"
       placeholder="Jawaban"
       class="pa-0"
