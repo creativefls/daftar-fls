@@ -128,7 +128,7 @@
       item-value="name"
       item-text="name"
     >
-      <div slot="no-data">anu</div>
+      <div slot="no-data" @click="applyOtherInstitution()">{{ searchInstitutions }}</div>
     </v-select>
 
     <div class="title primary__dark--text my-2">Kontak</div>
@@ -306,6 +306,10 @@ export default {
         console.log('err regency ', error)
         this.loadingRegency = false
       })
+    },
+    applyOtherInstitution () {
+      this.model.institution = this.searchInstitutions
+      this.institutionItems.push({ id: 'otherInstitution', name: this.searchInstitutions })
     }
   },
   mounted () {
