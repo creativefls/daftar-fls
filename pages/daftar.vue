@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import swal from 'sweetalert2'
+
 import WizardActions from '@/components/daftar/WizardActions'
 import StepOne from '@/components/daftar/step-1'
 import StepTwo from '@/components/daftar/step-2'
@@ -175,7 +177,11 @@ export default {
           this.formModel = { ...this.formModel, ...model };
           this.step = this.step + 1
         } else {
-          alert('Terdapat kesalahan di inputan')
+          swal(
+            'Error',
+            'Terdapat kesalahan di inputan',
+            'error'
+          )
         }
       })
     },
@@ -186,7 +192,11 @@ export default {
           this.formModel = { ...this.formModel, ...model };
           this.dialog = !this.dialog
         } else {
-          alert('Terdapat kesalahan di inputan')
+          swal(
+            'Error',
+            'Terdapat kesalahan di inputan',
+            'error'
+          )
         }
       })
     },
