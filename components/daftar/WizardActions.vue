@@ -14,6 +14,7 @@
         @click.stop="finishStep()"
         round
         block
+        :loading="loading"
         color="primary"
         depressed>Kirim <v-icon small right dark>send</v-icon></v-btn>
     </v-flex>
@@ -22,7 +23,7 @@
 
 <script>
 export default {
-  props: ['step', 'maxStep'],
+  props: ['step', 'maxStep', 'loading'],
   methods: {
     nextStep () {
       if (this.step < this.maxStep) this.$emit('next-step')

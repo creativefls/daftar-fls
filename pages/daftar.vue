@@ -45,6 +45,7 @@
             <wizard-actions class="pb-4 px-4"
               :step="step"
               :max-step="stepMax"
+              :loading="loadingSubmit"
               @next-step="nextStep()"
               @back-step="backStep()"
               @finish="finishStep()"
@@ -54,23 +55,6 @@
         </v-stepper>
       </v-card>
     </v-flex>
-    <v-dialog v-model="dialog" scrollable max-width="80%">
-      <v-card>
-        <v-card-title class="headline">Kirim form daftar FLS 2018</v-card-title>
-        <v-card-text>
-          Sebelum submit data inputannya ditampilin dulu buat konfirmasi, <br>maaf ya belum sempet bikin tampilannya ^_^'
-          <br>
-          <pre>
-            {{ formModel }}
-          </pre>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" round outline @click.native="dialog = false">Kembali</v-btn>
-          <v-btn color="primary" round :loading="loadingSubmit" depressed @click.native="submitData()">OK</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-layout>
 </template>
 
@@ -89,7 +73,6 @@ export default {
   data () {
     return {
       formModel: {},
-      dialog: false,
       step: 1,
       stepMax: 6,
       loadingSubmit: false
@@ -117,6 +100,7 @@ export default {
   methods: {
     submitData () {
       this.loadingSubmit = true
+      let self = this
 
       this.$axios.post('http://128.199.72.101:3000/api/registrars', {
         roomFirst: this.formModel.room1,
@@ -143,10 +127,30 @@ export default {
         console.log('submit ', response.data);
         this.institutionItems = response.data
         this.loadingSubmit = false
-        this.dialog = false
-        this.formModel = {}
-        this.step = 1
+        swal({
+          title: 'Terima kasih, ' + self.formModel.nickName,
+          html: 'Anda berhasil mendaftar dengan email <strong>' + self.formModel.email + '</strong>. Ingat email ini untuk pengumuman dan tahap berikutnya',
+          type: 'success',
+          allowOutsideClick: false,
+          // showCancelButton: true,
+          // reverseButtons: true,
+          confirmButtonText: 'OK',
+          // cancelButtonText: 'Tidak'
+        }).then((result) => {
+          self.formModel = {}
+
+          if (result.value) {
+            window.location.href = 'https://futureleadersummit.org'
+          }
+          // else if (result.dismiss === swal.DismissReason.cancel) {
+          // }
+        })
       }).catch(function (error) {
+        swal(
+          'Submit Error',
+          error.message,
+          'error'
+        )
         console.log('--- awh error ----')
         if (error.response) {
           // The request was made and the server responded with a status code
@@ -178,7 +182,7 @@ export default {
           this.step = this.step + 1
         } else {
           swal(
-            'Error',
+            'Input Error',
             'Terdapat kesalahan di inputan',
             'error'
           )
@@ -189,11 +193,12 @@ export default {
       this.$refs[name].validate().then(({valid, model}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
         if (valid) {
+          this.formModel = {}
           this.formModel = { ...this.formModel, ...model };
-          this.dialog = !this.dialog
+          this.submitData()
         } else {
           swal(
-            'Error',
+            'Input Error',
             'Terdapat kesalahan di inputan',
             'error'
           )
