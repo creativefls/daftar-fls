@@ -34,7 +34,9 @@
       :loading="loadingPlaceOfBirth"
       item-value="name"
       item-text="name"
-    ></v-select>
+    >
+      <div slot="no-data" @click="applyOtherPlaceOfBirth()">{{ searchPlaceOfBirth }}</div>
+    </v-select>
 
     <v-menu
       ref="menu"
@@ -310,6 +312,10 @@ export default {
     applyOtherInstitution () {
       this.model.institution = this.searchInstitutions
       this.institutionItems.push({ id: 'otherInstitution', name: this.searchInstitutions })
+    },
+    applyOtherPlaceOfBirth () {
+      this.model.placeOfBirth = this.searchPlaceOfBirth
+      this.placeOfBirthItems.push({ id: 'othePlaceOfBirth', name: this.searchPlaceOfBirth })
     }
   },
   mounted () {
