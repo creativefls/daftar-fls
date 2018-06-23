@@ -1,6 +1,9 @@
 <template>
   <div>
-    <small></small>
+    <div class="body-2 primary__dark--text">
+      <v-icon small>help</v-icon>
+      Kamu bisa menambahkan maksimal 5
+    </div>
     <v-card v-for="(socialActivity, index) in model.socialActivities" :key="index" class="fls-form-group my-2">
       <v-card-title>
         <v-spacer></v-spacer>

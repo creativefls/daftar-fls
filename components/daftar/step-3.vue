@@ -1,6 +1,9 @@
 <template>
   <div>
-    <small></small>
+    <div class="body-2 primary__dark--text">
+      <v-icon small>help</v-icon>
+      Kamu bisa menambahkan maksimal 5 organisasi
+    </div>
     <v-card v-for="(organization, index) in model.organizations" :key="index" class="fls-form-group elevation-3 my-2">
       <v-card-title>
         <v-spacer></v-spacer>
@@ -46,7 +49,7 @@
       </v-card-text>
 
     </v-card>
-    <v-btn v-if="this.model.organizations.length < 5" block @click="newFormOrganization()" color="info">Tambah</v-btn>
+    <v-btn v-if="this.model.organizations.length < 5" block @click="newFormOrganization()" round color="info">Tambah</v-btn>
   </div>
 </template>
 
@@ -68,13 +71,13 @@ export default {
         'Wakil Bidang',
         'Kadiv',
         'Staff Ahli',
-        'Staff',
-        'Anggota'
+        'Anggota/Staff'
       ],
       levelItems: [
-        'Internasional',
+        'Universitas',
+        'Daerah',
         'Nasional',
-        'Universitas'
+        'Internasional',
       ]
     }
   },

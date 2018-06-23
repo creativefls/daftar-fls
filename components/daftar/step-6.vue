@@ -3,7 +3,7 @@
     <div class="subheading primary__dark--text">Apa motivasi kamu mengikuti FLS 2018?</div>
     <v-text-field
       v-model="model.essayMotivationJoin"
-      data-vv-as="Pertanyaan"
+      data-vv-as="Jawaban"
       :error-messages="errors.collect('motivationJoin')"
       multi-line
       counter="1500"
@@ -16,7 +16,7 @@
     <div class="subheading primary__dark--text mt-4">Mengapa kamu memilih room tersebut?</div>
     <v-text-field
       v-model="model.essayRoomSelected"
-      data-vv-as="Pertanyaan"
+      data-vv-as="Jawaban"
       :error-messages="errors.collect('roomSelected')"
       multi-line
       counter="1500"
@@ -75,7 +75,7 @@ export default {
             <p>Yang jelas, BI mengimbau agar merchant tidak menerima bitcoin sebagai alat pembayaran resmi di Indonesia. Jika masyarakat mengalami kerugian terkait bitcoin, regulator BI tidak akan bertanggung jawab terkait hal ini.</p>
             <p>Bagaimana pandangan kamu sebagai warga negara Indonesia mengenai kehidupan dengan atau tanpa bitcoin di Indonesia? Apabila Bank Indonesia membuka ruang pendapat mengenai polemik bitcoin yang ada, bagaimana sikap kamu terhadap masalah bitcoin tersebut? Jelaskan!</p>
           `
-        case 'Proverty':
+        case 'Poverty':
           return `
             <p>Data BPS pada tahun 2014 menunjukkan, dari 31 juta warga miskin di negeri ini sebagian besar di antaranya adalah warga pedesaan yang berstatus sebagai petani. Berbagai upaya juga sudah dilakukan pemerintah dan banyak pihak untuk meningkatkan kesejahteraan petani, namun faktanya mereka tetap saja terjebak pada kemiskinan dan bahkan cenderung semakin miskin. Berbagai upaya yang dilakukan untuk mengangkat derajat kelayakan hidup petani seolah sia-sia dan petani sepertinya menjadi semakin tidak berdaya.</p>
             <p>Salah satu jawaban mengapa petani tetap saja miskin dikemukakan oleh Dirjen Prasarana dan Sarana Pertanian Kementerian Pertanian, Gatot Irianto. Menurutnya, banyak petani tetap miskin karena jumlah petani dan tenaga kerja di sektor pertanian, khususnya pertanian tanaman pangan memang cenderung berlebihan. Dengan luas baku lahan pertanian 8,1 juta hektar idealnya hanya dibutuhkan satu juta rumah tangga petani, dengan sekitar 400.000 hingga 500.000 tenaga kerja formal di tingkat budidaya. Padahal ada sekitar 30 juta petani yang menggeluti lahan itu.</p>

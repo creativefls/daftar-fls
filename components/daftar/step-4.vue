@@ -1,6 +1,9 @@
 <template>
   <div>
-    <small></small>
+    <div class="body-2 primary__dark--text">
+      <v-icon small>help</v-icon>
+      Kamu bisa menambahkan hingga 5 prestasi terbaikmu
+    </div>
     <v-card v-for="(achievement, index) in model.achievements" :key="index" class="fls-form-group elevation-3 my-2">
       <v-card-title>
         <v-spacer></v-spacer>
@@ -47,7 +50,7 @@
       </v-card-text>
 
     </v-card>
-    <v-btn v-if="this.model.achievements.length < 5" block @click="newFormAchievement()" color="info">Tambah</v-btn>
+    <v-btn v-if="this.model.achievements.length < 5" block @click="newFormAchievement()" round color="info">Tambah</v-btn>
   </div>
 </template>
 

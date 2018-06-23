@@ -30,7 +30,7 @@ export default {
         { name: 'Digital', color: 'success' },
         { name: 'Urban Planning', color: 'info' },
         { name: 'Entrepreneurship', color: 'warning' },
-        { name: 'Proverty', color: 'error' },
+        { name: 'Poverty', color: 'error' },
       ]
     }
   },
