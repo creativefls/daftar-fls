@@ -95,6 +95,9 @@
     ></v-select>
     <v-select
       :items="regencyItems"
+      :search-input.sync="searchRegency"
+      autocomplete
+      cache-items
       item-value="name"
       item-text="name"
       :loading="loadingRegency"
@@ -104,7 +107,9 @@
       v-validate="'required'"
       data-vv-name="regency"
       label="Kota/Kabupaten"
-    ></v-select>
+    >
+      <div slot="no-data" @click="applyOtherRegency()">{{ searchRegency }}</div>
+    </v-select>
     <v-text-field
       v-model="model.domicileAddress"
       :error-messages="errors.collect('address')"
@@ -174,6 +179,7 @@
 
 <script>
 import _debounce from 'lodash/debounce'
+import _orderBy from 'lodash/orderBy'
 
 export default {
   data () {
@@ -202,6 +208,7 @@ export default {
       placeOfBirthItems: [],
       searchPlaceOfBirth: '',
       regencyItems: [],
+      searchRegency: '',
       genderItems: [
         { name: 'male', alias: 'Laki-Laki' },
         { name: 'female', alias: 'Perempuan' }
@@ -224,7 +231,7 @@ export default {
     }, 500),
     searchInstitutions: _debounce(function (e) {
       e && this.fetchDataUniversities()
-    }, 500)
+    }, 500),
   },
   methods: {
     saveDateOfBirth (date) {
@@ -283,7 +290,7 @@ export default {
       this.loadingProvince = true
       this.$axios.get('http://128.199.72.101:3000/api/dataprovinces').then(response => {
         console.log('provinsi ', response.data);
-        this.provinceItems = response.data
+        this.provinceItems = _orderBy(response.data, ['name'], ['asc'])
         this.loadingProvince = false
       }).catch(error => {
         console.log('err provinsi ', error)
@@ -318,6 +325,10 @@ export default {
     applyOtherPlaceOfBirth () {
       this.model.placeOfBirth = this.searchPlaceOfBirth
       this.placeOfBirthItems.push({ id: 'othePlaceOfBirth', name: this.searchPlaceOfBirth })
+    },
+    applyOtherRegency () {
+      this.model.regency = this.searchRegency
+      this.regencyItems.push({ id: 'otherRegency', name: this.searchRegency })
     }
   },
   mounted () {
