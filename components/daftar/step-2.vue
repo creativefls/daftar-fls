@@ -35,7 +35,7 @@
       item-value="name"
       item-text="name"
     >
-      <div slot="no-data" @click="applyOtherPlaceOfBirth()">{{ searchPlaceOfBirth }}</div>
+      <div slot="no-data" @click="applyOtherPlaceOfBirth()">{{ loadingPlaceOfBirth ? 'Loading...' : searchPlaceOfBirth }}</div>
     </v-select>
 
     <v-menu
@@ -130,7 +130,7 @@
       item-value="name"
       item-text="name"
     >
-      <div slot="no-data" @click="applyOtherInstitution()">{{ searchInstitutions }}</div>
+      <div slot="no-data" @click="applyOtherInstitution()">{{ loadingUniversity ? 'Loading...' : searchInstitutions }}</div>
     </v-select>
 
     <div class="title primary__dark--text my-2">Kontak</div>
@@ -173,6 +173,8 @@
 </template>
 
 <script>
+import _debounce from 'lodash/debounce'
+
 export default {
   data () {
     return {
@@ -217,12 +219,12 @@ export default {
     'model.province' (val) {
       if (val) this.fetchDataRegencies()
     },
-    searchPlaceOfBirth (e) {
+    searchPlaceOfBirth: _debounce(function (e) {
       e && this.fetchDataPlaceOfBirth()
-    },
-    searchInstitutions (e) {
+    }, 500),
+    searchInstitutions: _debounce(function (e) {
       e && this.fetchDataUniversities()
-    }
+    }, 500)
   },
   methods: {
     saveDateOfBirth (date) {
