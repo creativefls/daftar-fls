@@ -15,7 +15,7 @@
         round
         block
         color="primary"
-        depressed>Kirim <v-icon right dark>cloud_upload</v-icon></v-btn>
+        depressed>Kirim <v-icon small right dark>send</v-icon></v-btn>
     </v-flex>
   </v-layout>
 </template>
