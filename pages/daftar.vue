@@ -125,27 +125,25 @@ export default {
         essayCaseStudy: this.formModel.essayCaseStudy
       }).then(response => {
         console.log('submit ', response.data);
-        this.institutionItems = response.data
         this.loadingSubmit = false
         swal({
           title: 'Terima kasih, ' + self.formModel.nickName,
           html: 'Kamu telah terdaftar dengan email <b>' + self.formModel.email + '</b>. Ingat selalu email ini, karena pengumuman hasil seleksi akan menggunakan email ini',
           type: 'success',
           allowOutsideClick: false,
-          // showCancelButton: true,
-          // reverseButtons: true,
           confirmButtonText: 'OK',
-          // cancelButtonText: 'Tidak'
         }).then((result) => {
-          self.formModel = {}
-
           if (result.value) {
-            window.location.href = 'https://futureleadersummit.org'
+            window.location.href = 'http://futureleadersummit.org/pesan?' +
+                                    'fullName=' + this.formModel.fullName +
+                                    '&nickName=' + this.formModel.nickName +
+                                    '&topic=' + 'pendaftaran 2018' +
+                                    '&email=' + this.formModel.email +
+                                    '&customTitle=' + 'Mohon berikan tanggapan, kritik atau saran mengenai pendaftaran ini'
           }
-          // else if (result.dismiss === swal.DismissReason.cancel) {
-          // }
         })
-      }).catch(function (error) {
+      }).catch(error => {
+        self.formModel = {}
         swal(
           'Submit Error',
           error.message,
@@ -193,7 +191,6 @@ export default {
       this.$refs[name].validate().then(({valid, model}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
         if (valid) {
-          this.formModel = {}
           this.formModel = { ...this.formModel, ...model };
           this.submitData()
         } else {
