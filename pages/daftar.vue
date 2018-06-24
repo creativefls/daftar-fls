@@ -129,7 +129,7 @@ export default {
         this.loadingSubmit = false
         swal({
           title: 'Terima kasih, ' + self.formModel.nickName,
-          html: 'Anda berhasil mendaftar dengan email <strong>' + self.formModel.email + '</strong>. Ingat email ini untuk pengumuman dan tahap berikutnya',
+          html: 'Kamu telah terdaftar dengan email <b>' + self.formModel.email + '</b>. Ingat selalu email ini, karena pengumuman hasil seleksi akan menggunakan email ini',
           type: 'success',
           allowOutsideClick: false,
           // showCancelButton: true,
