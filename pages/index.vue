@@ -18,7 +18,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" round nuxt to="/daftar">Daftar</v-btn>
+          <v-btn color="primary" round nuxt to="/daftar">Daftar Sekarang</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>

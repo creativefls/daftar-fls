@@ -3,6 +3,8 @@
     <v-navigation-drawer
       temporary
       v-model="drawer"
+      disable-resize-watcher
+      disable-route-watcher
       fixed
       app
     >
@@ -10,6 +12,7 @@
         <v-list-tile
           router
           :to="item.to"
+          @click="navigate(item.outlink, item.to)"
           :key="i"
           v-for="(item, i) in items"
           exact
@@ -73,9 +76,17 @@
         drawer: false,
         fixed: false,
         items: [
-          { icon: 'apps', title: 'Menu', to: '/' },
-          { icon: 'bubble_chart', title: 'Coba menu', to: '/inspire' }
+          { icon: 'home', title: 'Home', to: 'https://futureleadersummit.org', outlink: true }
         ]
+      }
+    },
+    methods: {
+      navigate (isOut, link) {
+        if (isOut) {
+          window.location.href = link
+        } else {
+          this.$router.push(link)
+        }
       }
     }
   }
