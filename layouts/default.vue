@@ -6,6 +6,7 @@
       disable-resize-watcher
       disable-route-watcher
       fixed
+      width="256"
       app
     >
       <v-list>
@@ -49,6 +50,7 @@
       </div>
       <v-btn
         icon
+        class="hidden-md-and-up"
         @click.stop="drawer = !drawer"
       >
         <v-icon>menu</v-icon>

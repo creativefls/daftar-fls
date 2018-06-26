@@ -1,12 +1,12 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-      <div class="display-2">Pendaftaran FLS 2018</div>
+      <div class="display-1">Pendaftaran Delegates FLS 2018</div>
       <br class="my-2">
       <v-card>
         <v-chip style="margin-top: -16px;" class="ml-4" color="primary" text-color="white">
           <div class="subheading">
-            Syarat dan Ketentuan Delegates 2018
+            Syarat dan Ketentuan
           </div>
         </v-chip>
         <v-card-text>
@@ -14,13 +14,13 @@
             <v-icon small>fiber_manual_record</v-icon> Pemuda/pemudi berusia 18-25 tahun
           </p>
           <p>
-            <v-icon small>fiber_manual_record</v-icon> Mempunyai ketertarikan dalam isu sosial sesuai room Future Leader Summit 2017
+            <v-icon small>fiber_manual_record</v-icon> Mempunyai ketertarikan dalam isu sosial sesuai room Future Leader Summit 2018
           </p>
           <p>
             <v-icon small>fiber_manual_record</v-icon> Bersedia membayar commitment fee, jika terpilih menjadi delegates
           </p>
           <p>
-            <v-icon small>fiber_manual_record</v-icon> Siap berkontribusi dan berjejaring di Future Leader Summit 2017
+            <v-icon small>fiber_manual_record</v-icon> Siap berkontribusi dan berjejaring di Future Leader Summit 2018
           </p>
           <p>
             <v-icon small>fiber_manual_record</v-icon> Mengikuti peraturan kebijakan dan alur pendaftaran
@@ -31,16 +31,24 @@
       <v-card>
         <v-chip style="margin-top: -16px;" class="ml-4" color="primary" text-color="white">
           <div class="subheading">
-            Tahap Pendaftaran Delegates 2017
+            Tahap Pendaftaran
           </div>
         </v-chip>
         <v-card-text>
           <!-- FIXME: banyak html seperti link quote dsb -->
           <p>
             <v-icon small>fiber_manual_record</v-icon>
-              Follow fanspage dan instagram Future Leader Summit 2017 : Future Leader Summit
+            Follow fanspage dan instagram Future Leader Summit 2018 : Future Leader Summit
+            <br>
+            <a class="ml-4 info--text" href="https://www.facebook.com/FutureLeaderSummit/" style="text-decoration: none;">
+              <v-icon color="info">fa fa-facebook-square</v-icon>
               @FutureLeaderSummit
+              </a>
+            <br>
+            <a class="ml-4 primary--text" href="https://www.instagram.com/flsummit/" style="text-decoration: none;">
+              <v-icon color="primary">fa fa-instagram</v-icon>
               @flsummit
+            </a>
           </p>
           <p>
             <v-icon small>fiber_manual_record</v-icon>
@@ -50,21 +58,23 @@
             <v-icon small>fiber_manual_record</v-icon>
             Setelah itu akan langsung mendapatkan konfirmasi melalui website dan email
           </p>
+          <p class="mb-0">
+            <v-icon small>fiber_manual_record</v-icon>
+            Download poster yang telah disediakan, kemudian upload di instagram kamu dengan caption berikut, lalu tag akun Future Leader Summit @FLSummit dan 5 teman kamu!
+          </p>
+          <blockquote class="blockquote mt-0">
+            Saya sudah berani mengambil kesempatan untuk menjadi agen perubahan dunia dengan mendaftar Future Leader Summit 2018. Kalau kamu kapan? Tantang dirimu sekarang juga!
+            <br> #FutureLeaderSummit2018
+            <br> #GrabTheChance
+            <br> #TakeThe Charge
+          </blockquote>
           <p>
             <v-icon small>fiber_manual_record</v-icon>
-            Download poster yang telah disediakan, kemudian upload di instagram kamu dengan caption
-            <br>
-            “Saya sudah berani untuk mulai berkarya dengan mendaftar Future Leader Summit 2017. Yuk, kalau kamu kapan? #DaretoCreate #FutureLeaderSummit2017”
-            <br>
-            lalu tag akun Future Leader Summit @FLSummit dan 5 teman kamu!
+            Pengumuman penerimaan delegates akan diumumkan melalui email dan website resmi Future Leader Summit 2018
           </p>
           <p>
             <v-icon small>fiber_manual_record</v-icon>
-            Pengumuman penerimaan delegates akan diumumkan melalui email dan website resmi Future Leader Summit 2017
-          </p>
-          <p>
-            <v-icon small>fiber_manual_record</v-icon>
-            Setelah pengumuman penerimaan delegates via email dan website Future Leader Summit 2017, delegates terpilih wajib melakukan konfrimasi dan pembayaran maksimal 3x24 jam via email PID masing-masing room.
+            Setelah pengumuman penerimaan delegates via email dan website Future Leader Summit 2018, delegates terpilih wajib melakukan konfrimasi dan pembayaran maksimal 3x24 jam via email PID masing-masing room.
           </p>
           <p>
             <v-icon small>fiber_manual_record</v-icon>
