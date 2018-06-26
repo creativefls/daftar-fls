@@ -108,6 +108,4 @@ nav
     text-transform capitalize
     font-size 16px
 
-main.content
-  background #3a2942
 </style>
