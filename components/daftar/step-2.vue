@@ -152,9 +152,11 @@
       type="email"
       label="Email"
       data-vv-as="Email"
-      :error-messages="errors.collect('email')"
+      :error-messages="errorEmail"
       v-validate="'required|email'"
       data-vv-name="email"
+      :loading="loadingCheckEmail"
+      @blur="handleValidateEmail()"
     ></v-text-field>
     <v-text-field
       v-model="model.socmed.instagram"
@@ -178,6 +180,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert2'
 import _debounce from 'lodash/debounce'
 import _orderBy from 'lodash/orderBy'
 
@@ -201,6 +204,7 @@ export default {
           instagram: ''
         },
       },
+      loadingCheckEmail: false,
       loadingPlaceOfBirth: false,
       loadingProvince: false,
       loadingRegency: false,
@@ -217,6 +221,11 @@ export default {
       institutionItems: [],
       searchInstitutions: '',
       menuDateOfBirth: false
+    }
+  },
+  computed: {
+    errorEmail () {
+      return this.errors.collect('email')
     }
   },
   watch: {
@@ -329,6 +338,29 @@ export default {
     applyOtherRegency () {
       this.model.regency = this.searchRegency
       this.regencyItems.push({ id: 'otherRegency', name: this.searchRegency })
+    },
+    handleValidateEmail () {
+      setTimeout(() => {
+        if (this.errors.items.length < 1) {
+          this.checkValidEmail()
+        }
+      })
+    },
+    checkValidEmail () {
+      this.loadingCheckEmail = true
+      this.$axios.$get('http://localhost:3000/api/Registrars/check-email', {
+        params: { email: this.model.email }
+      }).then(response => {
+        this.loadingCheckEmail = false
+        swal('OK', response.message, 'success')
+      }).catch(error => {
+        this.loadingCheckEmail = false
+        if (error.response) {
+          swal('Error', error.response.data.error.message, 'error')
+          return
+        }
+        swal('Error', error.message, 'error')
+      })
     }
   },
   mounted () {

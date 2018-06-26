@@ -27,7 +27,7 @@
           </p>
         </v-card-text>
       </v-card>
-      <br class="my-2">
+      <br class="my-3">
       <v-card>
         <v-chip style="margin-top: -16px;" class="ml-4" color="primary" text-color="white">
           <div class="subheading">
@@ -35,7 +35,6 @@
           </div>
         </v-chip>
         <v-card-text>
-          <!-- FIXME: banyak html seperti link quote dsb -->
           <p>
             <v-icon small>fiber_manual_record</v-icon>
             Follow fanspage dan instagram Future Leader Summit 2018 : Future Leader Summit
@@ -82,7 +81,7 @@
           </p>
         </v-card-text>
       </v-card>
-      <br class="my-2">
+      <br class="mb-1">
       <v-card>
         <v-card-text>
           <h3 class="text-xs-center">Grab the Chance, Take the Charge!</h3>
