@@ -128,7 +128,7 @@ export default {
         this.loadingSubmit = false
         swal({
           title: 'Terima kasih, ' + self.formModel.nickName,
-          html: 'Kamu telah terdaftar dengan email <b>' + self.formModel.email + '</b>. Ingat selalu email ini, karena pengumuman hasil seleksi akan menggunakan email ini',
+          html: 'Kamu telah terdaftar dengan email <b>' + self.formModel.email + '</b>. Ingat selalu email ini, karena pengumuman hasil seleksi akan menggunakan email tersebut. Untuk info lebih lanjut pantau sosial media FLS 2018',
           type: 'success',
           allowOutsideClick: false,
           confirmButtonText: 'OK',
