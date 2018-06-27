@@ -4,7 +4,7 @@
       <div class="display-1">Pendaftaran Delegates FLS 2018</div>
       <br class="my-2">
       <v-card>
-        <v-chip style="margin-top: -16px;" class="ml-4" color="primary" text-color="white">
+        <v-chip style="margin-top: -16px;" class="ml-4" label color="primary" text-color="white">
           <div class="subheading">
             Syarat dan Ketentuan
           </div>
@@ -27,9 +27,9 @@
           </p>
         </v-card-text>
       </v-card>
-      <br class="my-3">
+      <br class="my-4">
       <v-card>
-        <v-chip style="margin-top: -16px;" class="ml-4" color="primary" text-color="white">
+        <v-chip style="margin-top: -16px;" class="ml-4" label color="primary" text-color="white">
           <div class="subheading">
             Tahap Pendaftaran
           </div>
