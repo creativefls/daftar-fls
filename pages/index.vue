@@ -62,10 +62,16 @@
             Download poster yang telah disediakan, kemudian upload di instagram kamu dengan caption berikut, lalu tag akun Future Leader Summit @FLSummit dan 5 teman kamu!
           </p>
           <blockquote class="blockquote mt-0">
-            Saya sudah berani mengambil kesempatan untuk menjadi agen perubahan dunia dengan mendaftar Future Leader Summit 2018. Kalau kamu kapan? Tantang dirimu sekarang juga!
-            <br> #FutureLeaderSummit2018
-            <br> #GrabTheChance
-            <br> #TakeThe Charge
+            &#8220;
+            <br> Saya sudah berani mengambil kesempatan untuk menjadi agen perubahan dunia dengan mendaftar Future Leader Summit 2018. Kalau kamu kapan? Tantang dirimu sekarang juga!
+            <footer>
+              <small>
+                #FutureLeaderSummit2018
+                <br> #GrabTheChance
+                <br> #TakeThe Charge
+              </small>
+            </footer>
+            &#8221;
           </blockquote>
           <p>
             <v-icon small>fiber_manual_record</v-icon>
