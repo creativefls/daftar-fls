@@ -153,10 +153,10 @@
       label="Email"
       data-vv-as="Email"
       :error-messages="errorEmail"
-      v-validate="'required|email'"
+      v-validate="'required|email|unique'"
       data-vv-name="email"
+      data-vv-delay="700"
       :loading="loadingCheckEmail"
-      @blur="handleValidateEmail()"
     ></v-text-field>
     <v-text-field
       v-model="model.socmed.instagram"
@@ -225,7 +225,7 @@ export default {
   },
   computed: {
     errorEmail () {
-      return this.errors.collect('email')
+      if(!this.loadingCheckEmail) return this.errors.collect('email')
     }
   },
   watch: {
@@ -348,23 +348,41 @@ export default {
     },
     checkValidEmail () {
       this.loadingCheckEmail = true
-      this.$axios.$get('http://localhost:3000/api/Registrars/check-email', {
+      return this.$axios.$get('http://localhost:3000/api/Registrars/check-email', {
         params: { email: this.model.email }
       }).then(response => {
         this.loadingCheckEmail = false
-        swal('OK', response.message, 'success')
+        return {
+          valid: response.valid,
+          data: {
+            message: response.message
+          }
+        };
       }).catch(error => {
         this.loadingCheckEmail = false
         if (error.response) {
-          swal('Error', error.response.data.error.message, 'error')
-          return
+          return {
+            valid: false,
+            data: {
+              message: error.response.data.error.message
+            }
+          }
         }
-        swal('Error', error.message, 'error')
+        return {
+          valid: false,
+          data: {
+            message: error.message
+          }
+        }
       })
-    }
+    },
   },
   mounted () {
     this.fetchDataProvinces()
+    this.$validator.extend('unique', {
+      validate: this.checkValidEmail,
+      getMessage: (field, params, data) => data.message
+    });
   }
 }
 </script>
