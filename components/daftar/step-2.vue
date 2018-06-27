@@ -24,7 +24,6 @@
       :items="placeOfBirthItems"
       :search-input.sync="searchPlaceOfBirth"
       autocomplete
-      cache-items
       v-model="model.placeOfBirth"
       data-vv-as="Tempat Lahir"
       :error-messages="errors.collect('placeOfBirth')"
@@ -97,7 +96,6 @@
       :items="regencyItems"
       :search-input.sync="searchRegency"
       autocomplete
-      cache-items
       item-value="name"
       item-text="name"
       :loading="loadingRegency"
@@ -124,7 +122,6 @@
       :items="institutionItems"
       :search-input.sync="searchInstitutions"
       autocomplete
-      cache-items
       v-model="model.institution"
       data-vv-as="Sekolah/Universitas"
       :error-messages="errors.collect('institution')"
@@ -268,6 +265,9 @@ export default {
       }).then(response => {
         console.log('tmpt lahir ', response.data);
         this.placeOfBirthItems = response.data
+        if (this.placeOfBirthItems.length < 1) {
+          this.placeOfBirthItems.push({ id: 'othePlaceOfBirth', name: this.searchPlaceOfBirth.toUpperCase() })
+        }
         this.loadingPlaceOfBirth = false
       }).catch(error => {
         console.log('err tmpt lahir ', error)
@@ -289,6 +289,9 @@ export default {
       }).then(response => {
         console.log('provinsi ', response.data);
         this.institutionItems = response.data
+        if (this.institutionItems.length < 1) {
+          this.institutionItems.push({ id: 'otherInstitution', name: this.searchInstitutions })
+        }
         this.loadingUniversity = false
       }).catch(error => {
         console.log('err provinsi ', error)
@@ -329,11 +332,9 @@ export default {
     },
     applyOtherInstitution () {
       this.model.institution = this.searchInstitutions
-      this.institutionItems.push({ id: 'otherInstitution', name: this.searchInstitutions })
     },
     applyOtherPlaceOfBirth () {
       this.model.placeOfBirth = this.searchPlaceOfBirth
-      this.placeOfBirthItems.push({ id: 'othePlaceOfBirth', name: this.searchPlaceOfBirth })
     },
     applyOtherRegency () {
       this.model.regency = this.searchRegency
