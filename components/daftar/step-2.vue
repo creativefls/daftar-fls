@@ -81,6 +81,9 @@
     <div class="title primary__dark--text my-2">Alamat Domisili</div>
     <v-select
       :items="provinceItems"
+      :search-input.sync="searchProvince"
+      autocomplete
+      :no-data-text="loadingProvince ? 'Loading...' : searchProvince"
       item-value="name"
       item-text="name"
       return-object
@@ -206,18 +209,19 @@ export default {
       loadingProvince: false,
       loadingRegency: false,
       loadingUniversity: false,
-      placeOfBirthItems: [],
       searchPlaceOfBirth: '',
-      regencyItems: [],
       searchRegency: '',
+      searchInstitutions: '',
+      searchProvince: '',
+      placeOfBirthItems: [],
+      regencyItems: [],
+      provinceItems: [],
+      institutionItems: [],
+      menuDateOfBirth: false,
       genderItems: [
         { name: 'male', alias: 'Laki-Laki' },
         { name: 'female', alias: 'Perempuan' }
-      ],
-      provinceItems: [],
-      institutionItems: [],
-      searchInstitutions: '',
-      menuDateOfBirth: false
+      ]
     }
   },
   computed: {
@@ -240,6 +244,9 @@ export default {
     }, 500),
     searchRegency: _debounce(function (e) {
       e && this.fetchDataRegencies()
+    }, 500),
+    searchProvince: _debounce(function (e) {
+      e && this.fetchDataProvinces()
     }, 500)
   },
   methods: {
@@ -306,9 +313,18 @@ export default {
       this.model.regency =  ''
       this.regencyItems = []
 
-      this.$axios.get('http://128.199.72.101:3000/api/dataprovinces').then(response => {
+      this.$axios.get('http://128.199.72.101:3000/api/dataprovinces', {
+        params: {
+          filter: {
+            where: { name: { like: this.searchProvince + '.*', options: 'i' } }
+          }
+        }
+      }).then(response => {
         console.log('provinsi ', response.data);
         this.provinceItems = _orderBy(response.data, ['name'], ['asc'])
+        if (this.provinceItems < 1) {
+          this.provinceItems.push({ id: 'otherProvince', name: this.searchProvince.toUpperCase() })
+        }
         this.loadingProvince = false
       }).catch(error => {
         console.log('err provinsi ', error)
