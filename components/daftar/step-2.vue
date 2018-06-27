@@ -368,7 +368,7 @@ export default {
     },
     checkValidEmail () {
       this.loadingCheckEmail = true
-      return this.$axios.$get('http://localhost:3000/api/Registrars/check-email', {
+      return this.$axios.$get('http://128.199.72.101:3000/api/Registrars/check-email', {
         params: { email: this.model.email }
       }).then(response => {
         this.loadingCheckEmail = false
