@@ -45,7 +45,8 @@
             <wizard-actions class="pb-4 px-4"
               :step="step"
               :max-step="stepMax"
-              :loading="loadingSubmit"
+              :loadingFinish="loadingSubmit"
+              :loadingStep="loadingStep"
               @next-step="nextStep()"
               @back-step="backStep()"
               @finish="finishStep()"
@@ -75,7 +76,8 @@ export default {
       formModel: {},
       step: 1,
       stepMax: 6,
-      loadingSubmit: false
+      loadingSubmit: false,
+      loadingStep: false
     }
   },
   computed: {
@@ -173,8 +175,10 @@ export default {
       });
     },
     validateStep(name) {
+      this.loadingStep = true
       this.$refs[name].validate().then(({valid, model}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
+        this.loadingStep = false
         if (valid) {
           this.formModel = { ...this.formModel, ...model };
           this.step = this.step + 1

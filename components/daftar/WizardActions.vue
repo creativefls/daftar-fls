@@ -8,13 +8,14 @@
         @click.stop="nextStep()"
         round
         block
+        :loading="loadingStep"
         color="primary"
         depressed>Lanjut</v-btn>
       <v-btn v-else
         @click.stop="finishStep()"
         round
         block
-        :loading="loading"
+        :loading="loadingFinish"
         color="primary"
         depressed>Kirim <v-icon small right dark>send</v-icon></v-btn>
     </v-flex>
@@ -23,7 +24,7 @@
 
 <script>
 export default {
-  props: ['step', 'maxStep', 'loading'],
+  props: ['step', 'maxStep', 'loadingFinish', 'loadingStep'],
   methods: {
     nextStep () {
       if (this.step < this.maxStep) this.$emit('next-step')
