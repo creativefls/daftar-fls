@@ -114,7 +114,7 @@ export default {
         gender: this.formModel.gender,
         domicileAddress: this.formModel.domicileAddress,
         province: this.formModel.province.name,
-        achevements: this.formModel.achievements,
+        achievements: this.formModel.achievements,
         city: this.formModel.regency,
         institution: this.formModel.institution,
         phone: this.formModel.phone,
