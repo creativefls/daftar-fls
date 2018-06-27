@@ -106,7 +106,7 @@
       data-vv-name="regency"
       label="Kota/Kabupaten"
     >
-      <div slot="no-data" @click="applyOtherRegency()">{{ searchRegency }}</div>
+      <div slot="no-data" @click="applyOtherRegency()">{{ loadingRegency ? 'Loading...' : searchRegency }}</div>
     </v-select>
     <v-text-field
       v-model="model.domicileAddress"
@@ -238,6 +238,9 @@ export default {
     searchInstitutions: _debounce(function (e) {
       e && this.fetchDataUniversities()
     }, 500),
+    searchRegency: _debounce(function (e) {
+      e && this.fetchDataRegencies()
+    }, 500)
   },
   methods: {
     saveDateOfBirth (date) {
@@ -265,7 +268,7 @@ export default {
       }).then(response => {
         console.log('tmpt lahir ', response.data);
         this.placeOfBirthItems = response.data
-        if (this.placeOfBirthItems.length < 1) {
+        if (this.placeOfBirthItems.length < 1 && this.searchPlaceOfBirth) {
           this.placeOfBirthItems.push({ id: 'othePlaceOfBirth', name: this.searchPlaceOfBirth.toUpperCase() })
         }
         this.loadingPlaceOfBirth = false
@@ -289,7 +292,7 @@ export default {
       }).then(response => {
         console.log('provinsi ', response.data);
         this.institutionItems = response.data
-        if (this.institutionItems.length < 1) {
+        if (this.institutionItems.length < 1 && this.searchInstitutions) {
           this.institutionItems.push({ id: 'otherInstitution', name: this.searchInstitutions })
         }
         this.loadingUniversity = false
@@ -300,6 +303,9 @@ export default {
     },
     fetchDataProvinces () {
       this.loadingProvince = true
+      this.model.regency =  ''
+      this.regencyItems = []
+
       this.$axios.get('http://128.199.72.101:3000/api/dataprovinces').then(response => {
         console.log('provinsi ', response.data);
         this.provinceItems = _orderBy(response.data, ['name'], ['asc'])
@@ -311,19 +317,24 @@ export default {
     },
     fetchDataRegencies () {
       this.loadingRegency = true
-      this.regencyItems = []
-      this.model.regency =  ''
       this.$axios.get('http://128.199.72.101:3000/api/dataregencies', {
         params: {
           filter: {
+            limit: 20,
             where: {
-              provinceId: this.model.province.selfId || '100'
+              and: [
+                { provinceId: this.model.province.selfId || '100' },
+                { name: { like: this.searchRegency + '.*', options: 'i' } }
+              ]
             }
           }
         }
       }).then(response => {
         console.log('regency ', response.data);
         this.regencyItems = response.data
+        if (this.regencyItems.length < 1 && this.searchRegency) {
+          this.regencyItems.push({ id: 'otherRegency', name: this.searchRegency.toUpperCase() })
+        }
         this.loadingRegency = false
       }).catch(error => {
         console.log('err regency ', error)
@@ -337,15 +348,7 @@ export default {
       this.model.placeOfBirth = this.searchPlaceOfBirth
     },
     applyOtherRegency () {
-      this.model.regency = this.searchRegency
-      this.regencyItems.push({ id: 'otherRegency', name: this.searchRegency })
-    },
-    handleValidateEmail () {
-      setTimeout(() => {
-        if (this.errors.items.length < 1) {
-          this.checkValidEmail()
-        }
-      })
+      // this.model.regency = this.searchRegency
     },
     checkValidEmail () {
       this.loadingCheckEmail = true
