@@ -121,7 +121,7 @@ export default {
         email: this.formModel.email,
         socmed: this.formModel.socmed,
         organizations: this.formModel.organizations,
-        socialActivities: this.formModel.organizations,
+        socialActivities: this.formModel.socialActivities,
         essayMotivationJoin: this.formModel.essayMotivationJoin,
         essayRoomSelected: this.formModel.essayRoomSelected,
         essayCaseStudy: this.formModel.essayCaseStudy
