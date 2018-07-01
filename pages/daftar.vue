@@ -77,7 +77,8 @@ export default {
       step: 1,
       stepMax: 6,
       loadingSubmit: false,
-      loadingStep: false
+      loadingStep: false,
+      hasError: false
     }
   },
   computed: {
@@ -100,6 +101,16 @@ export default {
     }
   },
   methods: {
+    setHistory (dataModel) {
+      let storageData = localStorage.getItem('registrar')
+      let registrarData = JSON.parse(storageData)
+
+      if (registrarData instanceof Array) {
+        registrarData = [ ...registrarData, dataModel ]
+        localStorage.setItem('registrar', registrarData)
+      }
+
+    },
     submitData () {
       this.loadingSubmit = true
       let self = this
@@ -127,6 +138,7 @@ export default {
         essayCaseStudy: this.formModel.essayCaseStudy
       }).then(response => {
         console.log('submit ', response.data);
+        this.setHistory(this.formModel)
         this.loadingSubmit = false
         swal({
           title: 'Terima kasih, ' + self.formModel.nickName,
@@ -145,7 +157,7 @@ export default {
           }
         })
       }).catch(error => {
-        self.formModel = {}
+        this.hasError = true
         swal(
           'Submit Error',
           error.message,
@@ -195,7 +207,9 @@ export default {
       this.$refs[name].validate().then(({valid, model}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
         if (valid) {
-          this.formModel = { ...this.formModel, ...model };
+          if (!this.hasError) {
+            this.formModel = { ...this.formModel, ...model };
+          }
           this.submitData()
         } else {
           swal(
