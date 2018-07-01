@@ -59,7 +59,7 @@
           </p>
           <p class="mb-0">
             <v-icon small>fiber_manual_record</v-icon>
-            Download poster yang telah disediakan <a href="/v.png" download>di sini</a>, kemudian upload di instagram kamu dengan caption berikut, lalu tag akun Future Leader Summit @FLSummit dan 5 teman kamu!
+            Download poster yang telah disediakan <a href="/images/grab-the-chance.jpeg" download>di sini</a>, kemudian upload di instagram kamu dengan caption berikut, lalu tag akun Future Leader Summit @FLSummit dan 5 teman kamu!
           </p>
           <blockquote class="blockquote mt-0">
             &#8220;
