@@ -18,7 +18,7 @@ export default {
     let self = this
     swal({
       title: 'Terima kasih, ' + self.formModel.nickName,
-      html: 'Kamu telah terdaftar dengan email <b>' + self.formModel.email + '</b>. <a href="/v.png" download>lalala</a> Ingat selalu email ini, karena pengumuman hasil seleksi akan menggunakan email tersebut. Untuk info lebih lanjut pantau sosial media FLS 2018',
+      html: 'Kamu telah terdaftar dengan email <b>' + self.formModel.email + '</b>. <a href="/images/grab-the-chance.jpeg" download>lalala</a> Ingat selalu email ini, karena pengumuman hasil seleksi akan menggunakan email tersebut. Untuk info lebih lanjut pantau sosial media FLS 2018',
       type: 'success',
       allowOutsideClick: false,
       confirmButtonText: 'OK',

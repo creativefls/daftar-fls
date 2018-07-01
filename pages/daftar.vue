@@ -162,7 +162,7 @@ export default {
         })
       }).catch(error => {
         this.hasError = true
-        let data = { ...this.formModel, error: true }
+        let data = { ...this.formModel, error: error }
         this.setHistory(data)
         swal(
           'Submit Error',
