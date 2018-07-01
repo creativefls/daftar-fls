@@ -103,16 +103,17 @@ export default {
   methods: {
     setHistory (dataModel) {
       let storageData = localStorage.getItem('registrar')
-      let registrarData = JSON.parse(storageData)
+      console.log('storag data',storageData, typeof storageData);
 
-      if (registrarData instanceof Array) {
-        registrarData = [ ...registrarData, dataModel ]
-      } else {
-        registrarData = []
-        registrarData = [ ...registrarData, dataModel ]
-        console.log('history belum pernah', registrarData);
+      let registrarData = []
+
+      if (JSON.parse(JSON.stringify(storageData))) {
+        registrarData = JSON.parse(storageData)
       }
-      localStorage.setItem('registrar', registrarData)
+      console.log('ini registrar data',registrarData);
+
+      registrarData = [ ...registrarData, dataModel ]
+      localStorage.setItem('registrar', JSON.stringify(registrarData))
     },
     submitData () {
       this.loadingSubmit = true
@@ -161,6 +162,8 @@ export default {
         })
       }).catch(error => {
         this.hasError = true
+        let data = { ...this.formModel, error: true }
+        this.setHistory(data)
         swal(
           'Submit Error',
           error.message,
@@ -214,6 +217,7 @@ export default {
             this.formModel = { ...this.formModel, ...model };
           }
           this.submitData()
+          // this.setHistory(this.formModel)
         } else {
           swal(
             'Input Error',
