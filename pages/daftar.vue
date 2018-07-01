@@ -108,6 +108,8 @@ export default {
       if (registrarData instanceof Array) {
         registrarData = [ ...registrarData, dataModel ]
         localStorage.setItem('registrar', registrarData)
+      } else {
+        console.log('gagal simpan history', registrarData);
       }
 
     },
