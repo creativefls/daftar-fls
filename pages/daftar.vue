@@ -107,11 +107,12 @@ export default {
 
       if (registrarData instanceof Array) {
         registrarData = [ ...registrarData, dataModel ]
-        localStorage.setItem('registrar', registrarData)
       } else {
-        console.log('gagal simpan history', registrarData);
+        registrarData = []
+        registrarData = [ ...registrarData, dataModel ]
+        console.log('history belum pernah', registrarData);
       }
-
+      localStorage.setItem('registrar', registrarData)
     },
     submitData () {
       this.loadingSubmit = true
