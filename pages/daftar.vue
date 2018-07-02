@@ -112,6 +112,7 @@ export default {
       }
       console.log('ini registrar data',registrarData);
 
+      dataModel.createdAt = new Date()
       registrarData = [ ...registrarData, dataModel ]
       localStorage.setItem('registrar', JSON.stringify(registrarData))
     },
@@ -162,7 +163,7 @@ export default {
         })
       }).catch(error => {
         this.hasError = true
-        let data = { ...this.formModel, error: error }
+        let data = { ...this.formModel, error: error.message }
         this.setHistory(data)
         swal(
           'Submit Error',

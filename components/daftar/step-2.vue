@@ -33,6 +33,7 @@
       :loading="loadingPlaceOfBirth"
       item-value="name"
       item-text="name"
+      @keyup="placeOfBirthItems.push({ id: 'search', name: 'loading' })"
     >
       <div slot="no-data" @click="applyOtherPlaceOfBirth()">{{ loadingPlaceOfBirth ? 'Loading...' : searchPlaceOfBirth }}</div>
     </v-select>
@@ -108,6 +109,7 @@
       v-validate="'required'"
       data-vv-name="regency"
       label="Kota/Kabupaten"
+      @keyup="regencyItems.push({ id: 'search', name: 'loading' })"
     >
       <div slot="no-data" @click="applyOtherRegency()">{{ loadingRegency ? 'Loading...' : searchRegency }}</div>
     </v-select>
@@ -134,6 +136,7 @@
       :loading="loadingUniversity"
       item-value="name"
       item-text="name"
+      @keyup="institutionItems.push({ id: 'search', name: 'loading' })"
     >
       <div slot="no-data" @click="applyOtherInstitution()">{{ loadingUniversity ? 'Loading...' : searchInstitutions }}</div>
     </v-select>
