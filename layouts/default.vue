@@ -78,7 +78,8 @@
         drawer: false,
         fixed: false,
         items: [
-          { icon: 'home', title: 'Home', to: 'https://futureleadersummit.org', outlink: true }
+          { icon: 'home', title: 'Home', to: 'https://futureleadersummit.org', outlink: true },
+          { icon: 'history', title: 'Riwayat', to: '/riwayat', outlink: false }
         ]
       }
     },
