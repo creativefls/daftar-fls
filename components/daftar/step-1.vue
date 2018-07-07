@@ -1,7 +1,7 @@
 <template>
   <v-radio-group v-model="model.room1"
     name="room1"
-    data-vv-as="Room pertama"
+    data-vv-as="Room Pilihan"
     :error-messages="errors.collect('room1')"
     v-validate="'required'"
     column>
@@ -38,7 +38,8 @@ export default {
     validate () {
       return new Promise((resolve, reject) => {
         this.$validator.validateAll().then((valid) => {
-          resolve({ valid: valid, model: this.model });
+          let errors = this.errors.collect()
+          resolve({ valid: valid, model: this.model, error: errors[Object.keys(errors)[0]]});
         });
       })
     }

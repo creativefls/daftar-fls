@@ -196,7 +196,7 @@ export default {
     },
     validateStep(name) {
       this.loadingStep = true
-      this.$refs[name].validate().then(({valid, model}) => {
+      this.$refs[name].validate().then(({valid, model, error}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
         this.loadingStep = false
         if (valid) {
@@ -205,14 +205,14 @@ export default {
         } else {
           swal(
             'Input Error',
-            'Terdapat kesalahan di inputan',
+            error[0],
             'error'
           )
         }
       })
     },
     validateFinish(name) {
-      this.$refs[name].validate().then(({valid, model}) => {
+      this.$refs[name].validate().then(({valid, model, error}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
         if (valid) {
           if (!this.hasError) {
@@ -223,7 +223,7 @@ export default {
         } else {
           swal(
             'Input Error',
-            'Terdapat kesalahan di inputan',
+            error[0],
             'error'
           )
         }
