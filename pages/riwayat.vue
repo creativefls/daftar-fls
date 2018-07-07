@@ -15,7 +15,7 @@
                   <v-list-tile-content>
                     <v-list-tile-title>{{ item.fullName }}</v-list-tile-title>
                     <v-list-tile-sub-title class="primary--text">{{ item.room1 }}</v-list-tile-sub-title>
-                    <v-list-tile-sub-title>{{ item.createdAt }}</v-list-tile-sub-title>
+                    <v-list-tile-sub-title>{{ item.createdAt | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</v-list-tile-sub-title>
                   </v-list-tile-content>
 
                   <v-list-tile-action>
