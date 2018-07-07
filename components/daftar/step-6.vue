@@ -3,7 +3,7 @@
     <div class="subheading primary__dark--text">Apa motivasi kamu mengikuti FLS 2018?</div>
     <v-text-field
       v-model="model.essayMotivationJoin"
-      data-vv-as="Jawaban"
+      data-vv-as="Jawaban Motivasi"
       :error-messages="errors.collect('motivationJoin')"
       multi-line
       counter="1500"
@@ -16,7 +16,7 @@
     <div class="subheading primary__dark--text mt-4">Mengapa kamu memilih room tersebut?</div>
     <v-text-field
       v-model="model.essayRoomSelected"
-      data-vv-as="Jawaban"
+      data-vv-as="Jawaban Alasan"
       :error-messages="errors.collect('roomSelected')"
       multi-line
       counter="1500"
@@ -122,7 +122,8 @@ export default {
     validate () {
       return new Promise((resolve, reject) => {
         this.$validator.validateAll().then((valid) => {
-          resolve({ valid: valid, model: this.model });
+          let errors = this.errors.collect()
+          resolve({ valid: valid, model: this.model, error: errors[Object.keys(errors)[0]]});
         });
       })
     }

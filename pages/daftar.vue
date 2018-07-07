@@ -102,6 +102,7 @@ export default {
   },
   methods: {
     setHistory (dataModel) {
+      if(typeof localStorage == 'undefined') return
       let storageData = localStorage.getItem('registrar')
       console.log('storag data',storageData, typeof storageData);
 
@@ -163,13 +164,15 @@ export default {
         })
       }).catch(error => {
         this.hasError = true
-        let data = { ...this.formModel, error: error.message }
+        let data = { ...this.formModel, error: error }
         this.setHistory(data)
         swal(
           'Submit Error',
           error.message,
           'error'
         )
+        this.loadingSubmit = false
+
         console.log('--- awh error ----')
         if (error.response) {
           // The request was made and the server responded with a status code
@@ -195,7 +198,7 @@ export default {
     },
     validateStep(name) {
       this.loadingStep = true
-      this.$refs[name].validate().then(({valid, model}) => {
+      this.$refs[name].validate().then(({valid, model, error}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
         this.loadingStep = false
         if (valid) {
@@ -204,14 +207,14 @@ export default {
         } else {
           swal(
             'Input Error',
-            'Terdapat kesalahan di inputan',
+            error[0],
             'error'
           )
         }
       })
     },
     validateFinish(name) {
-      this.$refs[name].validate().then(({valid, model}) => {
+      this.$refs[name].validate().then(({valid, model, error}) => {
         console.log('name', typeof name, valid, JSON.stringify(model))
         if (valid) {
           if (!this.hasError) {
@@ -222,7 +225,7 @@ export default {
         } else {
           swal(
             'Input Error',
-            'Terdapat kesalahan di inputan',
+            error[0],
             'error'
           )
         }
