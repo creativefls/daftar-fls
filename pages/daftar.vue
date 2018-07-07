@@ -102,6 +102,7 @@ export default {
   },
   methods: {
     setHistory (dataModel) {
+      if(typeof localStorage == 'undefined') return
       let storageData = localStorage.getItem('registrar')
       console.log('storag data',storageData, typeof storageData);
 
@@ -163,7 +164,7 @@ export default {
         })
       }).catch(error => {
         this.hasError = true
-        let data = { ...this.formModel, error: error.message }
+        let data = { ...this.formModel, error: error }
         this.setHistory(data)
         swal(
           'Submit Error',
