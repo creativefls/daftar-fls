@@ -36,11 +36,23 @@
     </v-layout>
     <v-dialog v-model="dialog" width="80%">
       <v-card>
-        <v-card-title>
-          <code style="overflow: scroll;">
-            {{ selectedError }}
-          </code>
+        <v-card-title class="pb-0">
+          <div class="subheading">error message</div>
+          <v-spacer></v-spacer>
+          <v-btn icon flat @click="dialog = !dialog">
+            <v-icon>close</v-icon>
+          </v-btn>
         </v-card-title>
+        <v-card-text>
+          <code style="overflow: scroll;">
+            <v-btn icon flat @click="copyErrorMessage()">
+              <v-icon small>content_copy</v-icon>
+            </v-btn>
+            <div id="url_field">
+{{ selectedError }}
+            </div>
+          </code>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </div>
@@ -75,10 +87,18 @@ export default {
       this.selectedError = error
       this.dialog = true
     },
-    copyText () {
-      holdtext.innerText = copytext.innerText;
-      Copied = holdtext.createTextRange();
-      Copied.execCommand("Copy");
+    copyErrorMessage () {
+      var urlField = document.querySelector('#url_field');
+
+      // create a Range object
+      var range = document.createRange();
+      // set the Node to select the "range"
+      range.selectNode(urlField);
+      // add the Range to the set of window selections
+      window.getSelection().addRange(range);
+
+      // execute 'copy', can't 'cut' in this case
+      document.execCommand('copy');
     }
   },
   mounted () {
