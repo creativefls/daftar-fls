@@ -144,7 +144,7 @@ export default {
         essayCaseStudy: this.formModel.essayCaseStudy
       }).then(response => {
         console.log('submit ', response.data);
-        this.setHistory(this.formModel)
+        this.setHistory(response.data)
         this.loadingSubmit = false
         swal({
           title: 'Terima kasih, ' + self.formModel.nickName,
