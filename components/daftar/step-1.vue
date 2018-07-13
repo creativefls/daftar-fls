@@ -9,8 +9,6 @@
                 <img :src="room.image" alt="">
               </v-card-title>
               <v-card-text>
-                <!-- <h4 class="title mb-1">{{ room.name }}</h4> -->
-                <p>{{ room.description }}</p>
                 <v-radio-group v-model="model.room1"
                   name="room1"
                   data-vv-as="Room Pilihan"
