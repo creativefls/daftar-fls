@@ -3,8 +3,8 @@
     <v-flex text-xs-center>
       <v-container>
         <v-layout align-center justify-center wrap>
-          <v-flex v-for="room in rooms" :key="room.name" md4 xs6>
-            <v-card class="elevation-0 cursor-pointer" color="transparent" @click.native.stop="openRoomInfo(room.name)">
+          <v-flex v-for="room in rooms" :key="room.name" md4 xs12>
+            <v-card style="box-shadow: none;" class="cursor-pointer" color="transparent" @click.native.stop="openRoomInfo(room.name)">
               <v-card-title style="justify-content: center;">
                 <img :src="room.image" alt="">
               </v-card-title>
